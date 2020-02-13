@@ -107,7 +107,25 @@ body{  font-family: Verdana}
   document.getElementById("Names").innerHTML= "Hello " + Name
  </script>
   
-<!--button-->
+  
+   <!--if else statement-->
+     <p id="Timestamp"></p>  
+    <script>
+            function func() {
+              var response;
+              var time = new Date().getHours();
+              if (time < 12) {
+                response = "Good Morning";
+              } else if (time <16) {
+                response = "Good Afternoon";
+              } else {
+                response = "Good evening";
+              }
+              document.getElementById("Timestamp").innerHTML = response;
+            }
+        </script>
+
+ <!--button-->
   
 <body>Click here to find out what state Jacqui is from.</body>
 
@@ -122,32 +140,19 @@ function myFunction() {
 </script>
 
   <!--making an object and displaying the info-->
-   <p id="idme"></p>  
+  <body>A little basic info about me.</body>
+  <p id="idme"></p>  
 <script>
-var me = {first:"Jacqueline", Major:"Ensci", age:"22"};
+var me = {first:"Jacqueline",
+          Major:"Ensci", 
+          age:"22"};
 
 document.getElementById("idme").innerHTML =
 "My name is" me.first + " and I am majoring in " + me.Major + " and I am" me.age "years old."; 
   
   </script> 
-  
- <p id="Timestamp"></p>  
-  <script>
-function myFunction2() {
-  var time = Timestamp(System.currentTimeMillis()); 
-  var response;
-  if (time < 12) {
-    response = "Good Morning";
-  } 
-  else {
-    response = "Good Afternoon";
-  }
-  document.getElementById("Timestamp").innerHTML = response;
-}
-   document.getElementById("Timestamp").innerHTML = "It is" + time;
-}  
-</script>
-  
+
+
   <p>This is a list of instruments I can play:</p>
 <p id="music"></p>    
 <script>
