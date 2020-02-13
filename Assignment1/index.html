@@ -97,16 +97,17 @@ body{  font-family: Verdana}
   </div>
 </div>
  
- 
+  <h1>Assignment 1</h1>
+ <!--Prompts-->
   <p id="Names"></p>
  <script> 
   var Name;
   Name= prompt("What is your first name?");
   console.log(Name);
-  document.getElementById("Names").innerHTML= "Hi " + Name
+  document.getElementById("Names").innerHTML= "Hello " + Name
  </script>
   
-
+<!--button-->
   
 <body>Click here to find out what state Jacqui is from.</body>
 
@@ -120,11 +121,21 @@ function myFunction() {
 }
 </script>
 
+  <!--making an object and displaying the info-->
+   <p id="idme"></p>  
+<script>
+var me = {first:"Jacqueline", Major:"Ensci", age:22};
+
+// Display some data from the object:
+document.getElementById("idme").innerHTML =
+"My name is" me.first + " and I am majoring in " + me.Major + " and I am" me.age "years old."; 
+  
+  </script> 
   
  <p id="Timestamp"></p>  
   <script>
 function myFunction2() {
-  var time = new Date().getHours(); 
+  var time = Timestamp(System.currentTimeMillis()); 
   var response;
   if (time < 12) {
     response = "Good Morning";
