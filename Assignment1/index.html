@@ -170,11 +170,17 @@ document.getElementById("music").innerHTML = instruments;
   </script>  
   
   
-  <!--user input2-->
-  <p> Which of the following animals do you prefer?</p>
-  <input type="radio" id="animal1" name="sex" type="Falcon">Falcon<br>
-        <input type="radio" id="animal2" name="type" value="Armadillo">Armadillo<br>
-        <input type="radio" id="animal3" name="tpe" value="Seahorse">Seahorse<br>
+  <!--loop-->
+  <p><strong>What are the first 5 multiples of 5</strong></p>
+  <p id="multiples"></p>
+  <script>
+ var text = "";
+var i;
+for (i = 1; i = 5; i++) {
+  text += " = " + i*5+ "<br>";
+}
+document.getElementById("multiples").innerHTML = text;
+</script>
 
   
 </body>
