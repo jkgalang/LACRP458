@@ -109,22 +109,26 @@ body{  font-family: Verdana}
   
   
    <!--if else statement-->
-     <p id="Timestamp"></p>  
-    <script>
+
+  <button onclick="func()">Greeting For You!</button>
+        <p id="greet"></p>
+
+        <script>
             function func() {
-              var response;
+              var reply;
               var time = new Date().getHours();
               if (time < 12) {
-                response = "Good Morning";
-              } else if (time <16) {
-                response = "Good Afternoon";
+                reply = "Good Morning!";
+              } else if (time < 16) {
+                reply = "Good Afternoon!";
               } else {
-                response = "Good evening";
+                reply = "Good Evening";
               }
-              document.getElementById("Timestamp").innerHTML = response;
+              document.getElementById("greet").innerHTML = reply;
             }
         </script>
-
+  
+ 
  <!--button-->
   
 <p>Click here to find out what state Jacqui is from.</p>
@@ -142,14 +146,14 @@ function myFunction() {
   <!--making an object and displaying the info-->
   <p>A little basic info about me.</p>
   <p id="idme"></p>  
-<script>
+
+  <script>
 var me = {first:"Jacqueline",
           Major:"Ensci", 
           age:"22"};
 
 document.getElementById("idme").innerHTML =
-"My name is" me.first + " and I am majoring in " + me.Major + " and I am" me.age "years old."; 
-  
+"My name is " + me.first+ ", my major is " + me.Major+ ", and I am " + me.age+" years old";
   </script> 
 
 
