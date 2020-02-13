@@ -99,20 +99,12 @@ body{  font-family: Verdana}
  
   <p id="Names"></p>
  <script> 
- 
-   
-  var Name, Name2;
+  var Name;
   Name= prompt("What is your first name?");
   console.log(Name);
+  document.getElementById("Names").innerHTML= "Hi " + Name
+ </script>
   
-  Name2=prompt("What is your last name?");
-  console.log(Name2);
- 
-  document.getElementById("Names").innerHTML= "Hi" + Name
-   
- 
-  
-  </script>
   
 <h1>Click here to find out what state Jacqui is from.</h1>
 
