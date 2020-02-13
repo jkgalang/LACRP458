@@ -111,13 +111,36 @@ body{  font-family: Verdana}
   document.getElementById("Names").innerHTML= "Hi" + Name
    
  
-   
   
   </script>
   
-  
-    
-  
+<h1>Click here to find out what state Jacqui is from.</h1>
+
+
+<button onclick="myFunction()">Click me</button>
+
+<p id="state"></p>
+
+<script>
+function myFunction() {
+  document.getElementById("state").innerHTML = "California";
+}
+</script>
+
+  <script>
+function myFunction() {
+  var time =Timestamp(System.currentTimeMillis());
+  if (time <12) {
+  time=  "Good morning!";
+  } 
+  Then(time>12){
+    time= "Good afternoon!}
+  else {
+ time="Good Evening!";
+  }
+  document.getElementById("ife").innerHTML = time;
+}
+</script>
   
   
 </body>
