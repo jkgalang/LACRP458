@@ -98,7 +98,7 @@ body{  font-family: Verdana}
 </div>
  
   <h1>Assignment 1</h1>
- <!--Prompts-->
+ <!--user input 1-->
   <p id="Names"></p>
  <script> 
   var Name;
@@ -131,7 +131,7 @@ body{  font-family: Verdana}
  
  <!--button-->
   
-<p>Click here to find out what state Jacqui is from.</p>
+  <p><strong>Click here to find out what state Jacqui is from.</strong></p>
 
 <button onclick="myFunction()">Click me</button>
 
@@ -144,7 +144,7 @@ function myFunction() {
 </script>
 
   <!--making an object and displaying the info-->
-  <p>A little basic info about me.</p>
+  <p><strong>A little basic info about me.</strong></p>
   <p id="idme"></p>  
 
   <script>
@@ -157,7 +157,7 @@ document.getElementById("idme").innerHTML =
   </script> 
 
 
-  <p>This is a list of instruments I can play:</p>
+  <p><strong>This is a list of instruments I can play:</strong></p>
 <p id="music"></p>    
 <script>
   var instruments = [
@@ -168,6 +168,14 @@ document.getElementById("idme").innerHTML =
 ];
 document.getElementById("music").innerHTML = instruments;
   </script>  
+  
+  
+  <!--user input2-->
+  <p> Which of the following animals do you prefer?</p>
+  <input type="radio" id="animal1" name="sex" type="Falcon">Falcon<br>
+        <input type="radio" id="animal2" name="type" value="Armadillo">Armadillo<br>
+        <input type="radio" id="animal3" name="tpe" value="Seahorse">Seahorse<br>
+
   
 </body>
 </html>
