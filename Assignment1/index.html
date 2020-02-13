@@ -97,7 +97,7 @@ body{  font-family: Verdana}
   </div>
 </div>
  
-  //prompt name//
+ 
   <p id="Names"></p>
  <script> 
   var Name;
@@ -106,7 +106,7 @@ body{  font-family: Verdana}
   document.getElementById("Names").innerHTML= "Hi " + Name
  </script>
   
-  //What state button//
+
   
 <body>Click here to find out what state Jacqui is from.</body>
 
@@ -121,28 +121,29 @@ function myFunction() {
 </script>
 
   
-  //Time of day//  
  <p id="Timestamp"></p>  
   <script>
-function myFunction() {
-  var time =Timestamp(System.currentTimeMillis());
-  if (time <12) {
-  time=  "Good morning!";
-  } 
-  else {
- time="Good Evening!";
+function myFunction2() {
+  var time = new Date().getHours(); 
+  var response;
+  if (time < 12) {
+    response = "Good Morning";
+  } else {
+    response = "Good Afternoon";
   }
-  document.getElementById("Timestamp").innerHTML = time;
+  document.getElementById("Timestamp").innerHTML = response;
 }
+   document.getElementById("Timestamp").innerHTML = "It is" + time;
+}  
 </script>
   
   <p>This is a list of instruments I can play:</p>
 <p id="music"></p>    
 <script>
   var instruments = [
-  "Guitar",
-  "Piano",
-  "Saxophone", 
+  "Guitar ",
+  "Piano ",
+  "Saxophone ", 
   "Harmonica"
 ];
 document.getElementById("music").innerHTML = instruments;
