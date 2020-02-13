@@ -97,6 +97,7 @@ body{  font-family: Verdana}
   </div>
 </div>
  
+  //prompt name//
   <p id="Names"></p>
  <script> 
   var Name;
@@ -105,14 +106,13 @@ body{  font-family: Verdana}
   document.getElementById("Names").innerHTML= "Hi " + Name
  </script>
   
+  //What state button//
   
-<h1>Click here to find out what state Jacqui is from.</h1>
-  <style>
-
+<body>Click here to find out what state Jacqui is from.</body>
 
 <button onclick="myFunction()">Click me</button>
 
-<p id="state"></p>
+  <p id="state"></p>
 
 <script>
 function myFunction() {
@@ -121,6 +121,7 @@ function myFunction() {
 </script>
 
   
+  //Time of day//  
  <p id="Timestamp"></p>  
   <script>
 function myFunction() {
@@ -135,6 +136,17 @@ function myFunction() {
 }
 </script>
   
+  <p>This is a list of instruments I can play:</p>
+<p id="music"></p>    
+<script>
+  var instruments = [
+  "Guitar",
+  "Piano",
+  "Saxophone", 
+  "Harmonica"
+];
+document.getElementById("music").innerHTML = instruments;
+  </script>  
   
 </body>
 </html>
