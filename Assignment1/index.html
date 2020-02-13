@@ -110,32 +110,32 @@ body{  font-family: Verdana}
   
    <!--if else statement-->
 
-  <button onclick="func()">Greeting For You!</button>
-        <p id="greet"></p>
+<button onclick="func()">Greeting For You!</button>
+<p id="greet"></p>
 
-        <script>
-            function func() {
-              var reply;
-              var time = new Date().getHours();
-              if (time < 12) {
-                reply = "Good Morning!";
-              } else if (time < 18) {
-                reply = "Good Afternoon!";
-              } else {
-                reply = "Good Evening!";
-              }
-              document.getElementById("greet").innerHTML = reply;
-            }
-        </script>
+ <script>
+    function func() {
+       var reply;
+       var time = new Date().getHours();
+       if (time < 12) {
+       reply = "Good Morning!";
+     } else if (time < 18) {
+       reply = "Good Afternoon!";
+     } else {
+       reply = "Good Evening!";
+     }
+       document.getElementById("greet").innerHTML = reply;
+     }
+ </script>
   
  
- <!--button-->
+<!--button-->
   
-  <p><strong>Click here to find out what state Jacqui is from.</strong></p>
+<p><strong>Click here to find out what state Jacqui is from.</strong></p>
 
 <button onclick="myFunction()">Click me</button>
 
-  <p id="state"></p>
+<p id="state"></p>
 
 <script>
 function myFunction() {
@@ -143,7 +143,8 @@ function myFunction() {
 }
 </script>
 
-  <!--making an object and displaying the info-->
+  
+<!--making an object and displaying the info-->
   <p><strong>A little basic info about me.</strong></p>
   <p id="idme"></p>  
 
@@ -157,7 +158,7 @@ document.getElementById("idme").innerHTML =
   </script> 
 
 
-  <p><strong>This is a list of instruments I can play:</strong></p>
+<p><strong>This is a list of instruments I can play:</strong></p>
 <p id="music"></p>    
 <script>
   var instruments = [
@@ -169,12 +170,11 @@ document.getElementById("idme").innerHTML =
 document.getElementById("music").innerHTML = instruments;
   </script>  
   
-  
-  <!--loop-->
+ <!--loop-->
   <p><strong>What are the first 5 multiples of 5</strong></p>
   <p id="multiples"></p>
   <script>
- var text = "";
+var text = "";
 var i;
 for (i = 1; i < 6; i++) {
   text += " = " + i*5+ "<br>";
@@ -182,8 +182,8 @@ for (i = 1; i < 6; i++) {
 document.getElementById("multiples").innerHTML = text;
 </script>
 
-  <!--user input 2-->
-  <p>The button will ask you about what your favorite season is.</p>
+ <!--user input 2-->
+  <p><strong>The button will ask you about what your favorite season is.</strong></p>
 
 <button onclick="myFunction2()">Click Here</button>
 
