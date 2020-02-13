@@ -119,10 +119,10 @@ body{  font-family: Verdana}
               var time = new Date().getHours();
               if (time < 12) {
                 reply = "Good Morning!";
-              } else if (time < 16) {
+              } else if (time < 18) {
                 reply = "Good Afternoon!";
               } else {
-                reply = "Good Evening";
+                reply = "Good Evening!";
               }
               document.getElementById("greet").innerHTML = reply;
             }
@@ -176,12 +176,42 @@ document.getElementById("music").innerHTML = instruments;
   <script>
  var text = "";
 var i;
-for (i = 0; i < 5; i++) {
+for (i = 1; i < 6; i++) {
   text += " = " + i*5+ "<br>";
 }
 document.getElementById("multiples").innerHTML = text;
 </script>
 
+  <!--user input 2-->
+  <p>The button will ask you about what your favorite season is.</p>
+
+<button onclick="myFunction()">Click Here</button>
+
+<p id="season"></p>
+
+<script>
+function myFunction() {
+  var text;
+  var favSeason = prompt("What's your favorite season?", "Spring");
+  switch(favSeason) {
+    case "Summer":
+      text = "Summer is great, there are so many fun things to do outside.";
+      break;
+    case "Spring":
+      text = "Spring is my favorite as well!";
+      break;
+    case "Winter":
+      text = "I like winter for about the week, you can handle the cold better than I can!";
+      break;
+    case "Fall":
+      text = "What a beautiful time of year!";
+      break;
+    default:
+      text = "Nice!";
+  }
+  document.getElementById("season").innerHTML = text;
+}
+</script>  
   
 </body>
 </html>
