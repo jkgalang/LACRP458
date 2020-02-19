@@ -1,1 +1,92 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+    <meta name="description" content="Exercise 5">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Getting Started with Leaflet</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+
+    <style>
+        #map {
+            width: 700px;
+            height: 500px;
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <div id='map'></div>
+    
+    <br>Pan to <a href="javascript:dc()">DC, Washington</a><br>
+
+    <a href="javascript:zoomOut()">Zoom out to level 8</a><br>
+
+  <button id="annapolisBtn">Visit Annapolis,Maryland</button>
+
+
+    <script>
+        var map = L.map('map').setView([38.7893, -77.1872], 13);
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            // This is a unique access token, you must register for your own from https://account.mapbox.com/access-tokens/
+            accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s2c25ud25pMGc3czNlcXN0cDEzcjZkaSJ9.VnR_HwGbYoJPuZELu6K_ig' 
+        }).addTo(map);
+
+        L.marker([38.818343, -77.082026).addTo(map)
+            .bindPopup("Springfield, Virginia")
+            .openPopup();
+   
+  //----------Adding multiple town markers----------
+
+        //an array of towns
+        var towns = [
+            [38.818343, -77.082026, "Alexandria, Virginia"],
+            [38.8554, - 77.0521, "Crystal City, Virginia"],
+            [38.8304, -77.1964, "Annanale, Virginia],
+            [38.899158, -77.260463, "Vienna, Virginia
+        ];
+
+        //loop through the array and add a marker for each
+        for (var i = 0; i < towns.length; i++) {
+            marker = new L.marker([towns[i][0], towns[i][1]])
+                .bindPopup(towns[i][2])
+                .addTo(map);
+        }
+
+
+        //----------Links below the Map----------
+
+        //Pan to Washingtong DC
+        function  DC() {
+            map.panTo(new L.LatLng(38.895, -77.0366));
+        }
+
+        //set Zoom
+        function zoomOut() {
+            map.setZoom(8);
+        };
+
+
+        //add an event listener for a click event on the button
+        document.getElementById("annapolisBtn").addEventListener("click", annapolis);
+
+        //Annapolis Maryland function
+        function annapolis() {
+            map.setView(new L.LatLng(38.9784, -77.1964), 13);
+        };    
+    </script>
+
+</body>
+</html>
