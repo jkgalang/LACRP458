@@ -120,8 +120,8 @@
 
 <script>
 
-//london england	
-var map = L.map('map').setView([51.5074,-0.1278], 13);
+//chicago	
+var map = L.map('map').setView([41.8781,-87.6298], 13);
     
 var base = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -137,18 +137,18 @@ var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
 });
 
-//london eye
-var circle = new L.circle([51.503399, -0.119519], {
+//bean
+var circle = new L.circle([41.8827, -87.6233], {
 	radius: 300,
 	fill: true,
 	color: '#0B5345',
 	fillColor: '#0B5345',
 	fillOpacity: 0.8
- }).bindPopup("London Eye").addTo(map); 
+ }).bindPopup("The Bean").addTo(map); 
  
-var bridge = L.marker([51.507879, -0.087732]).bindPopup('London Bridge').addTo(map);
+var art = L.marker([41.8796, -87.6237]).bindPopup('Art Institute of Chicago').addTo(map);
    
-var markers= L.layerGroup([bridge, circle]);
+var markers= L.layerGroup([art, circle]);
 
 var nexrad = L.tileLayer.wms("http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi", {
     layers: 'nexrad-n0r-900913',
