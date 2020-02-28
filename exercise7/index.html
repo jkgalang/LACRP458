@@ -5,7 +5,7 @@
     <meta name="description" content=" exercise 7">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Exerxise 7</title>
+    <title>Exercise 7</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin=""> 
@@ -137,24 +137,24 @@ var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
 });
 
-//tower of london circle
-var circle = new L.circle([42.013876, -93.635770], {
+//london eye
+var circle = new L.circle([51.503399, -0.119519], {
 	radius: 300,
 	fill: true,
 	color: '#0B5345',
 	fillColor: '#0B5345',
 	fillOpacity: 0.8
- }).bindPopup("Tower of London").addTo(map); 
+ }).bindPopup("London Eye").addTo(map); 
  
-var BPalace = L.marker([51.5014, -0.1419]).bindPopup('Buckingham Palace');
+var bridge = L.marker([51.507879, -0.087732]).bindPopup('London Bridge');
    
-var markers= L.layerGroup([BPalace, circle]);
+var markers= L.layerGroup([bridge, circle]);
 	
 var weather = L.tileLayer.wms("http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi", {
-   layers: 'nexrad-n0r-900913',
-   format: 'image/png',
-   transparent: true,
-   attribution: "Weather data © 2012 IEM Nexrad"
+    layers: 'nexrad-n0r-900913',
+    format: 'image/png',
+    transparent: true,
+    attribution: "Weather data © 2012 IEM Nexrad"
 });
 	
 var baseLayers = {
