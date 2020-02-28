@@ -148,7 +148,7 @@ var circle = new L.circle([42.013876, -93.635770], {
  
 var BPalace = L.marker([51.5014, -0.1419]).bindPopup('Buckingham Palace'),
    
-var weather = L.tileLayer('https://maps.aerisapi.com/[client_id]_[client_key]/radar/{z}/{x}/{y}/current.png', {
+var weather = L.tileLayer('https://maps.aerisapi.com/[client_id]_[client_key]/radar/{z}/{x}/{y}/current.png'), {
     subdomains: '1234',
     attribution: '&copy;AerisWeather',
 }).addTo(map);
