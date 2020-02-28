@@ -147,11 +147,8 @@ var circle = new L.circle([42.013876, -93.635770], {
  }).bindPopup("Tower of London").addTo(map); 
  
 var BPalace = L.marker([51.5014, -0.1419]).bindPopup('Buckingham Palace'),
-
-var bigBen = L.marker([51.5007, -0.1246]).addTo(map)
-   .bindPopup("Big Ben");
    
-var markers = L.layerGroup([BPalace,bigBen,circle]);
+var markers = L.layerGroup([BPalace,circle]);
 
 var weather = L.tileLayer('https://maps.aerisapi.com/[client_id]_[client_key]/radar/{z}/{x}/{y}/current.png', {
     subdomains: '1234',
