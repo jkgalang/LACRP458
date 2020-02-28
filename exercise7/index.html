@@ -148,13 +148,14 @@ var circle = new L.circle([42.013876, -93.635770], {
  
 var BPalace = L.marker([51.5014, -0.1419]).bindPopup('Buckingham Palace');
    
+var markers= L.layerGroup([BPalace, circle]);
 	
-//var nexrad = L.tileLayer.wms("http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi", {
- //   layers: 'nexrad-n0r-900913',
-  //  format: 'image/png',
-  //  transparent: true,
-  //  attribution: "Weather data © 2012 IEM Nexrad"
-//});
+var weather = L.tileLayer.wms("http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi", {
+   layers: 'nexrad-n0r-900913',
+   format: 'image/png',
+   transparent: true,
+   attribution: "Weather data © 2012 IEM Nexrad"
+});
 	
 var baseLayers = {
     "base": base,
@@ -163,8 +164,7 @@ var baseLayers = {
 
 var overlays = {
     "Marker": markers,
-    "Weather": weather,
-    "Circle": circle	
+    "Weather": weather,	
 };
 	
 L.control.layers(baseLayers, overlays).addTo(map);
