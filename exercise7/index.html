@@ -139,14 +139,14 @@ var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{
 
 //bean
 var circle = new L.circle([41.8827, -87.6233], {
-	radius: 300,
+	radius: 200,
 	fill: true,
 	color: '#0B5345',
 	fillColor: '#0B5345',
 	fillOpacity: 0.8
  }).bindPopup("The Bean").addTo(map); 
  
-var art = L.marker([41.8796, -87.6237]).bindPopup('Art Institute of Chicago').addTo(map);
+var shedd = L.marker([41.8676, -87.6140]).bindPopup('Shedd Aquarium').addTo(map);
    
 var markers= L.layerGroup([art, circle]);
 
