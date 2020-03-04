@@ -13,6 +13,10 @@
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
+    <script src="../geojson/USA.geojson"></script>
+    <script src="../geojson/VtSchools.geojson"></script>
+    <script src="../geojson/trails.geojson"></script>
+    
 <style>
   body{  font-family: Verdana}
 
@@ -127,8 +131,12 @@
             id: 'mapbox/streets-v11',
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s3YzV4ZnBoMDBjZDNvcXR0NDJlNjJiYyJ9.iWzKAHCSm6-qpO78CP1dmw' 
         }).addTo(map);
-	
-	L.geoJSON(usa).addto(map);
+    
+    L.geoJSON(usa).addto(map);
 	L.geoJSON(trails).addto(map);
 	L.geoJSON(vtschools).addto(map);
+    
+    </script>
+</html>
+    
 
