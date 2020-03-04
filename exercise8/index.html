@@ -127,4 +127,8 @@
             id: 'mapbox/streets-v11',
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s3YzV4ZnBoMDBjZDNvcXR0NDJlNjJiYyJ9.iWzKAHCSm6-qpO78CP1dmw' 
         }).addTo(map);
+	
+	L.geoJSON(usa).addto(map);
+	L.geoJSON(trails).addto(map);
+	L.geoJSON(vtschools).addto(map);
 
