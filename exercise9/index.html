@@ -197,7 +197,7 @@
 		});
 	}
 
-	geojson = L.geoJson(statesData, counties {
+	geojson = L.geoJson(statesData, {
 		style: style,
 		onEachFeature: onEachFeature
 	}).addTo(map);
