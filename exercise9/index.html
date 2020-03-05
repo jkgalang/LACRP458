@@ -135,63 +135,70 @@
         }).addTo(map);
     L.geoJSON(prov).addTo(map);
 	
-	/*function getColor(d) {
-		
-		if d = "Ontario" then 
-		return d =  "Ontario" ? '#253494' :
-		       d =  "Manitoba"  ? '#2c7fb8' :
-		       d =  "Alberta" ? '#41b6c4' :
-		       d =  "Yukon Territory"   ? '#7fcdbb' :
-		       d =  "Prince Edward Island"   ? '#c7e9b4' :
-		       d =  "Saskatchewan"  ? '#2c7fb8' :
-		       d =  "Nova Scotia"  ? '#2c7fb8' :
-		       d =  "New Brunswick" ? '#2c7fb8' :
-		       d =  "Northwest Territories" ? '#2c7fb8' :
-		       d =  "Nunavut"  ? '#2c7fb8' :
-		       d =  "British Columbia"  ? '#2c7fb8' :
-		       d =  "Newfoundland and Labrador" ? '#2c7fb8' :
-		       d =   "Quebec"  ? '#2c7fb8' :
-			
+	function getColor(d) {
+// get color depending on population density value
+	function getColor(d) {
+		return d > 1000 ? '#253494' :
+				d > 500  ? '#2c7fb8' :
+				d > 200  ? '#41b6c4' :
+				d > 100   ? '#7fcdbb' :
+				d > 50   ? '#c7e9b4' :
 							'#ffffcc';
-		}*/
-	
-	 map.data.setStyle(function(feature) {
-    var prov_NAME = feature.getProperty('name');
-    var color = "red";
-    if (prov_NAME == "Ontario") {
-      color = "green";
-    }
-    return {
-      fillColor: color,
-      strokeWeight: 1
-    }
-    //else if (prov_NAME == "Alberta") {
-    //  color = "blue";
-  //  }
-   // return {
-   //   fillColor: color,
-   //   strokeWeight: 1
-    
-    else   
-    return {
-      fillColor: 'yellow',
-      strokeWeight: 1
-    }	
-  });
-}
+	}
 
-	//function style(feature) {
-		//return {
-		//	weight: 1,
-		//	opacity: 1,
-		//	color: 'white',
-		//	fillOpacity: 0.7,
-		//	fillColor: getColor(feature.properties.name)
-		//};
-	//}
-	geojson = L.geoJson(prov, {
+	function style(feature) {
+		return {
+			weight: 1,
+			opacity: 1,
+			color: 'white',
+			fillOpacity: 0.7,
+			fillColor: getColor(feature.properties.density)
+		};
+	}
+
+	function highlightFeature(e) {
+		var layer = e.target;
+
+		layer.setStyle({
+			weight: 2,
+			color: 'black',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+			layer.bringToFront();
+		}
+
+	}
+
+	var geojson;
+
+	function resetHighlight(e) {
+		geojson.resetStyle(e.target);
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
+
+	geojson = L.geoJson(statesData, {
 		style: style,
+		onEachFeature: onEachFeature
 	}).addTo(map);
-	
-    </script>
+
+	map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
+
+   
+</script>
+
+</body>
 </html>
