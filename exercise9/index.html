@@ -14,8 +14,8 @@
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
     
-  <!--<script src="-----"></script>
-      <script src="----"></script>
+  <script src="../geojson/CANprovidences.geojson"></script>
+     <!-- <script src="----"></script>
       <script src="----"></script>-->
     
 <style>
@@ -134,3 +134,6 @@
             id: 'mapbox/streets-v11',
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s3ZHdmYmZnMjQxOTNlcDY5cXc2dml2MCJ9.4sx7-PbFG0R3lILfK4rpOQ' 
         }).addTo(map);
+    L.geoJSON(prov).addTo(map);
+    </script>
+</html>
