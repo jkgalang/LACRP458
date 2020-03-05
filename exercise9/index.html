@@ -134,5 +134,33 @@
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s3ZHdmYmZnMjQxOTNlcDY5cXc2dml2MCJ9.4sx7-PbFG0R3lILfK4rpOQ' 
         }).addTo(map);
     L.geoJSON(prov).addTo(map);
+	
+	function getColor(name) {
+		return name = "Ontario" ? '#253494' :
+				name =  "Manitoba"  ? '#2c7fb8' :
+				name =  "Alberta" ? '#41b6c4' :
+				name =  "Yukon Territory"   ? '#7fcdbb' :
+				name =  "Prince Edward Island"   ? '#c7e9b4' :
+				name =  "Saskatchewan"  ? '#2c7fb8' :
+				name =  "Nova Scotia"  ? '#2c7fb8' :
+				name =  "New Brunswick" ? '#2c7fb8' :
+				name =  "Northwest Territories" ? '#2c7fb8' :
+				name =  "Nunavut"  ? '#2c7fb8' :
+				name =  "British Columbia"  ? '#2c7fb8' :
+				name =  "Newfoundland and Labrador" ? '#2c7fb8' :
+				name =  "Quebec"  ? '#2c7fb8' :
+			
+							'#ffffcc';
+		}
+
+	function style(feature) {
+		return {
+			weight: 1,
+			opacity: 1,
+			color: 'white',
+			fillOpacity: 0.7,
+			fillColor: getColor(feature.properties.name)
+		};
+	}
     </script>
 </html>
