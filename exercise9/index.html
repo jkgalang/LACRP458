@@ -135,20 +135,20 @@
         }).addTo(map);
     L.geoJSON(prov).addTo(map);
 	
-	function getColor(name) {
-		return name =  "Ontario" ? '#253494' :
-		       name =  "Manitoba"  ? '#2c7fb8' :
-		       name =  "Alberta" ? '#41b6c4' :
-		       name =  "Yukon Territory"   ? '#7fcdbb' :
-		       name =  "Prince Edward Island"   ? '#c7e9b4' :
-		       name =  "Saskatchewan"  ? '#2c7fb8' :
-		       name =  "Nova Scotia"  ? '#2c7fb8' :
-		       name =  "New Brunswick" ? '#2c7fb8' :
-		       name =  "Northwest Territories" ? '#2c7fb8' :
-		       name =  "Nunavut"  ? '#2c7fb8' :
-		       name =  "British Columbia"  ? '#2c7fb8' :
-		       name =  "Newfoundland and Labrador" ? '#2c7fb8' :
-		       name =   Quebec  ? '#2c7fb8' :
+	function getColor(d) {
+		return d =  "Ontario" ? '#253494' :
+		       d =  "Manitoba"  ? '#2c7fb8' :
+		       d =  "Alberta" ? '#41b6c4' :
+		       d =  "Yukon Territory"   ? '#7fcdbb' :
+		       d =  "Prince Edward Island"   ? '#c7e9b4' :
+		       d =  "Saskatchewan"  ? '#2c7fb8' :
+		       d =  "Nova Scotia"  ? '#2c7fb8' :
+		       d =  "New Brunswick" ? '#2c7fb8' :
+		       d =  "Northwest Territories" ? '#2c7fb8' :
+		       d =  "Nunavut"  ? '#2c7fb8' :
+		       d =  "British Columbia"  ? '#2c7fb8' :
+		       d =  "Newfoundland and Labrador" ? '#2c7fb8' :
+		       d =   "Quebec"  ? '#2c7fb8' :
 			
 							'#ffffcc';
 		}
@@ -162,6 +162,10 @@
 			fillColor: getColor(feature.properties.name)
 		};
 	}
-	L.geoJson(prov, {style: style}).addTo(map);
+	geojson = L.geoJson(prov, {
+		style: style,
+		onEachFeature: onEachFeature
+	}).addTo(map);
+	
     </script>
 </html>
