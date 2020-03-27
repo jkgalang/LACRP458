@@ -174,7 +174,7 @@
 	
 	
 // get color depending on rate of obesity 
-	function getColor(d) {
+	function getColorObesity(d) {
 		return d > 75 ? '#253494' :
 				d > 50  ? '#2c7fb8' :
 				d > 25  ? '#41b6c4' :
@@ -188,7 +188,7 @@
 			opacity: 1,
 			color: 'white',
 			fillOpacity: 0.7,
-			fillColor: getColor(feature.properties.Obesity)
+			fillColor: getColorObesity(feature.properties.Obesity)
 		};
 	}
 
@@ -235,7 +235,7 @@
 
 	
 //Add graduated symbols for city population	
-function getColor(d) {
+function getColorCity(d) {
 		return d > 75 ? '#253494' :
 				return d > 20000000 ? '#253494' :
 				d > 10000000  ? '#2c7fb8' :
@@ -285,8 +285,7 @@ var overlays = {
 	
 L.control.layers(baseLayers, overlays).addTo(map);
 
-	
-//add city population legend
+
 var legend = L.control({
   position: 'bottomright'	
 });
@@ -303,7 +302,7 @@ legend.onAdd = function(map) {
   // loop through items and generate a label with a colored square for each
   for (var i = 0; i < levels.length; i++) {
     div.innerHTML +=
-      '<i style="background:' + getColor(levels[i]+ 1 ) + ' "></i> ' +
+      '<i style="background:' + getColorObesity(levels[i]+ 1 ) + ' "></i> ' +
       levels[i] + (levels[i + 1] ? '&ndash;' + levels[i + 1] + '<br>' : '+');
   }
 
@@ -317,6 +316,7 @@ var legend2 = L.control({
   position: 'bottomright'
 });
 
+//City population legend
 legend2.onAdd = function(map) {
 
   var div = L.DomUtil.create('div', 'info legend'),
@@ -326,7 +326,7 @@ legend2.onAdd = function(map) {
   // loop through items and generate a label with a colored square for each
   for (var i = 0; i < levels.length; i++) {
     div.innerHTML +=
-      '<i style="background:' + getColor(levels2[i]+ 1 ) + ' "></i> ' +
+      '<i style="background:' + getColorCity(levels2[i]+ 1 ) + ' "></i> ' +
       levels2[i] + (levels2[i + 1] ? '&ndash;' + levels2[i + 1] + '<br>' : '');
   }
 
