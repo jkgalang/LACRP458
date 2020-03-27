@@ -249,7 +249,7 @@ function getColorCity(d) {
     
     var minRadius = 5; 
     
-    L.geoJson(data, {
+    L.geoJson(cities, {
         pointToLayer: function(feature, ll){
             return L.circleMarker(ll, {
                 color: '#8B0000',
