@@ -151,6 +151,8 @@
 </div>
     
     <div id='map'></div>
+	 <button id="iowaBtn"Look closer at West Virginia</button>
+	 <button id="wvBtn">Look closer at Iowa</button>
     </body>
 
 <script>
@@ -352,8 +354,25 @@ map.on('overlayadd', function (eventLayer) {
 		 legend2.addTo(this);
 	}	
 });
+	
+	
+        //Button to go to iowa
+        document.getElementById("iowaBtn").addEventListener("click", iowa);
+
+        function iowa() {
+            map.setView(new L.LatLng(37.0902,-95.7129), 7);
+        };    
 
    
+        //Button to go to west virginia
+        document.getElementById("wvBtn").addEventListener("click", wv);
+
+        function wv() {
+            map.setView(new L.LatLng(38.921511, -80.294105), 7);
+        };    
+	
+	
+	
 </script>
 
 </html>
