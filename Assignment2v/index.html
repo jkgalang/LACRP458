@@ -85,6 +85,7 @@
   #map {
     width: 800px;
 	  height: 600px;
+	  z-index:-10;
     }
     
   .legend {
@@ -310,7 +311,7 @@ map.on('overlayremove', function (eventLayer) {
 	console.log(eventLayer.name  + " off");
 	if (eventLayer.name == "Obesity") {
 		this.removeControl(legend);
-	}else if (eventLayer.name == "City Population"){
+	}else if (eventLayer.name == "Cities"){
 		this.removeControl(legend2);
 	}
 });
@@ -318,7 +319,7 @@ map.on('overlayadd', function (eventLayer) {
 	console.log(eventLayer.name + " on");
 	if (eventLayer.name == "Obesity") {
 		 legend.addTo(this);
-	}else if (eventLayer.name == "City Population"){
+	}else if (eventLayer.name == "Cities"){
 		 legend2.addTo(this);
 	}	
 });
