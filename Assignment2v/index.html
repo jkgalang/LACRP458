@@ -184,7 +184,7 @@
 	
 	
 	
-	function highlightFeature(e) {
+	/*function highlightFeature(e) {
 		var layer = e.target;
 		layer.setStyle({
 			weight: 2,
@@ -195,9 +195,9 @@
 		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
 			layer.bringToFront();
 		}
-	}
+	}*/
 	var geojson;
-	function resetHighlight(e) {
+	/*function resetHighlight(e) {
 		geojson.resetStyle(e.target);
 	}
 	function zoomToFeature(e) {
@@ -209,7 +209,7 @@
 			mouseout: resetHighlight,
 			click: zoomToFeature
 		});
-	}
+	}*/
 	geojson = L.geoJson(statesData, {
 		style: style,
 		onEachFeature: function (feature, layer) {
