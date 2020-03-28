@@ -5,31 +5,30 @@
     <meta name="description" content=" Assignment 2">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Assignment 2</title>
+    <title>Exercise 10</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin=""> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    <script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
-
-
-    <script src = "../geojson/usaData" > < /script> 
-    <script src = "../geojson/cities" > < /script>
-    <script src = "../geojson/obesity" > < /script>
-
+    
+    
+  <script src="../geojson/usaData"></script>
+    <script src="../geojson/obesity"></script>
+<script src="../geojson/us_cities.geojson"></script>
+      
+    
 <style>
   body{  font-family: Verdana}
-
-
 /* Navbar container */
 .navbar {
   overflow: hidden;
   background-color: #117A65;
   font-family: Verdana;
 }
-
 /* Links inside the navbar */
 .navbar a {
   float: right;
@@ -39,13 +38,11 @@
   padding: 14px 16px;
   text-decoration: none;
 }
-
 /* The dropdown container */
 .dropdown {
   float: left;
   overflow: hidden;
 }
-
 /* Dropdown button */
 .dropdown .dropbtn {
   font-size: 16px;  
@@ -57,7 +54,6 @@
   font-family: inherit;
   margin: 0;
 }
-
 /* Add a background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
   background-color: #117A65;
@@ -71,7 +67,6 @@
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
-
 /* Links inside the dropdown */
 .dropdown-content a {
   float: none;
@@ -81,12 +76,10 @@
   display: block;
   text-align: left;
 }
-
 /* Add a grey background color to dropdown links on hover */
 .dropdown-content a:hover {
   background-color: #ddd;
 }
-
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
@@ -94,7 +87,6 @@
   #map {
     width: 800px;
 	  height: 600px;
-	    z-index:-10
     }
     
   .legend {
@@ -114,7 +106,6 @@
     background: rgba(255,255,255,0.8);
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     border-radius: 5px;
-
 }
 .info h4 {
     margin: 0 0 5px;
@@ -123,7 +114,7 @@
 </style>
 </head>
 <body>
-	    
+  
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="navbar">
   <a href="https://jkgalang.github.io/LACRP458/">Home</a>
@@ -149,236 +140,201 @@
 </div>
     
     <div id='map'></div>
-	    
-//add image of heart	    
-    <img src="HeartHealth.png"
-      width="400" height="400">
-//Add buttons to locations      
-    < button id = "iowaBtn" > Look closer at West Virginia < /button>
-    < button id = "wvBtn" > Look closer at Iowa </button> 
-    </body>	    
-    	    
-	   
-
-    < script >
-    var map = L.map('map').setView([37.0902, -95.7129], 3);
-
-var base = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox/streets-v11',
-    accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s4OTlwMTVvMDRvYzNsbnRncjNneGc1MSJ9.v6cjjlFdRRAgoGJrSP30yg'
-}).addTo(map);
-var states = L.geoJSON(statesData).addTo(map);
-var cities = L.geoJSON(cities).addTo(map);
-var obesity = L.geoJSON(obesity).addTo(map);
-
-var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
+	 <button id="iowaBtn">Look closer at West Virginia</button>
+	 <button id="wvBtn">Look closer at Iowa</button>
+    </body>
+<script>
+    var map = L.map('map').setView([37.0902,-95.7129], 3);
+       var base = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s4OTlwMTVvMDRvYzNsbnRncjNneGc1MSJ9.v6cjjlFdRRAgoGJrSP30yg' 
+        }).addTo(map);
+   var states=  L.geoJSON(statesData).addTo(map);
+   var cities= L.geoJSON(cities).addTo(map);
+   var obesity= L.geoJSON(obesity).addTo(map);
+    
+    var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
 });
-
-
-
+	
+	
 // get color depending on rate of obesity 
-function getColorObesity(d) {
-    return d > 75 ? '#253494' :
-        d > 50 ? '#2c7fb8' :
-        d > 25? '#41b6c4' :
-        d > 0 ? '#7fcdbb' :
-        '#ffffcc';
-}
-
-function style(feature) {
-    return {
-        weight: 1,
-        opacity: 1,
-        color: 'white',
-        fillOpacity: 0.7,
-        fillColor: getColorObesity(feature.properties.Obesity)
-    };
-}
-
-function highlightFeature(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 2,
-        color: 'black',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-    }
-
-}
-
-var geojson;
-
-function resetHighlight(e) {
-    geojson.resetStyle(e.target);
-}
-
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}
-
-function onEachFeature(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-        click: zoomToFeature
-    });
-}
-
-geojson = L.geoJson(statesData, {
-    style: style,
-    onEachFeature: onEachFeature
-}).addTo(map);
-
-map.attributionControl.addAttribution('Obesity Data &copy; <a href="https://catalog.data.gov/dataset/national-obesity-by-state-b181b/">CDC</a>');
-
-
+	function getColorObesity(d) {
+		return d > 75 ? '#253494' :
+				d > 50  ? '#2c7fb8' :
+				d > 25  ? '#41b6c4' :
+				d > 0   ? '#7fcdbb' :
+							'#ffffcc';
+	}
+	function style(feature) {
+		return {
+			weight: 1,
+			opacity: 1,
+			color: 'white',
+			fillOpacity: 0.7,
+			fillColor: getColorObesity(feature.properties.Obesity)
+		};
+	}
+	function highlightFeature(e) {
+		var layer = e.target;
+		layer.setStyle({
+			weight: 2,
+			color: 'black',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+			layer.bringToFront();
+		}
+	}
+	var geojson;
+	function resetHighlight(e) {
+		geojson.resetStyle(e.target);
+	}
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
+	geojson = L.geoJson(statesData, {
+		style: style,
+		onEachFeature: onEachFeature
+	}).addTo(map);
+	map.attributionControl.addAttribution('Obesity Data &copy; <a href="https://catalog.data.gov/dataset/national-obesity-by-state-b181b/">CDC</a>');
+	
 //Add graduated symbols for city population	
 function getColorCity(d) {
-
-    return d > 20000000 ? '#253494' :
-        d > 10000000 ? '#2c7fb8' :
-        d > 5000000 ? '#41b6c4' :
-        d > 1000000 ? '#7fcdbb' :
-        d > 500000 ? '#c7e9b4' :
-        '#ffffcc';
-}
-
-var minValue = 500000;
-
-var minRadius = 5;
-
-L.geoJson(cities, {
-    pointToLayer: function(feature, ll) {
-        return L.circleMarker(ll, {
-            color: '#8B0000',
-            opacity: 1,
-            weight: 2,
-            fillColor: '#8B0000',
-            fillOpacity: .6,
-            radius: calcRadius(feature.properties.pop)
-        });
+		
+				return d > 20000000 ? '#253494' :
+				d > 10000000  ? '#2c7fb8' :
+				d > 5000000  ? '#41b6c4' :
+				d > 1000000  ? '#7fcdbb' :
+				d > 500000   ? '#c7e9b4' :
+							'#ffffcc';
+	}	
+	
+    var minValue = 500000;
+    
+    var minRadius = 5; 
+    
+    L.geoJson(cities, {
+        pointToLayer: function(feature, ll){
+            return L.circleMarker(ll, {
+                color: '#8B0000',
+                opacity: 1,
+                weight: 2,
+                fillColor: '#8B0000',
+                fillOpacity: .6,
+                //radius: 10
+                radius: calcRadius(feature.properties.pop)   
+            });
+        }
+              
+    }).addTo(map);
+    
+    function calcRadius(val) {
+        
+        return 1.0083 * Math.pow(val/minValue,.5716) * minRadius;  
+        
     }
-
-}).addTo(map);
-
-function calcRadius(val) {
-
-    return 1.0083 * Math.pow(val / minValue, .5716) * minRadius;
-
-}
-
+	
 //layer control
-var baseLayers = {
+    var baseLayers = {
     "Basemap 1": base,
     "Basemap 2": OpenStreetMap_HOT
 };
-
 var overlays = {
     "States": states,
     "Cities": cities,
     "Obesity": obesity
 };
-
+	
 L.control.layers(baseLayers, overlays).addTo(map);
 
-
+//Obesity legend	
 var legend = L.control({
-    position: 'bottomright'
+position: 'bottomright'	
 });
-
-	    
-//obesity rates legend
 legend.onAdd = function(map) {
-
-    var div = L.DomUtil.create('div', 'info legend'),
-        levels = [0, 25, 50, 75, 100];
-
-
-    div.innerHTML += "<b>Obesity Rates</b><br>";
-    // loop through items and generate a label with a colored square for each
-    for (var i = 0; i < levels.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + getColorObesity(levels[i] + 1) + ' "></i> ' +
-            levels[i] + (levels[i + 1] ? '&ndash;' + levels[i + 1] + '<br>' : '+');
-    }
-
-    return div;
+  var div = L.DomUtil.create('div', 'info legend'),
+    levels = [0, 25, 50, 75, 100];
+	
+	
+	
+	 div.innerHTML += "<b>Obesity rates</b><br>";
+  // loop through items and generate a label with a colored square for each
+  for (var i = 0; i < levels.length; i++) {
+    div.innerHTML +=
+      '<i style="background:' + getColorObesity(levels[i]+ 1 ) + ' "></i> ' +
+      levels[i] + (levels[i + 1] ? '&ndash;' + levels[i + 1] + '<br>' : '+');
+  }
+  return div;
 };
 legend.addTo(map);
 
-//add legend
-
+	
+	
+//City population legend	
 var legend2 = L.control({
-    position: 'bottomright'
+  position: 'bottomright'
 });
-
-//City population legend
+	
 legend2.onAdd = function(map) {
-
-    var div = L.DomUtil.create('div', 'info legend'),
-        levels2 = [500000, 1000000, 5000000, 10000000, 20000000];
-
-    div.innerHTML += "<b>City Population</b><br>";
-    // loop through items and generate a label with a colored square for each
-    for (var i = 0; i < levels.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + getColorCity(levels2[i] + 1) + ' "></i> ' +
-            levels2[i] + (levels2[i + 1] ? '&ndash;' + levels2[i + 1] + '<br>' : '');
-    }
-
-    return div;
+  var div = L.DomUtil.create('div', 'info legend'),
+    levels2 = [500000, 1000000, 5000000, 10000000, 20000000];
+	
+	 div.innerHTML += "<b>City Population</b><br>";
+  // loop through items and generate a label with a colored square for each
+  for (var i = 0; i < levels.length; i++) {
+    div.innerHTML +=
+      '<i style="background:' + getColorCity(levels2[i]+ 1 ) + ' "></i> ' +
+      levels2[i] + (levels2[i + 1] ? '&ndash;' + levels2[i + 1] + '<br>' : '');
+  }
+  return div;
 };
 legend2.addTo(map);
 //Add graduated symbols for city population
-
+	
 // Add and remove legend from layers when selected in control
-map.on('overlayremove', function(eventLayer) {
-    console.log(eventLayer.name + " off");
-    if (eventLayer.name == "Obesity") {
-        this.removeControl(legend);
-    } else if (eventLayer.name == "City Population") {
-        this.removeControl(legend2);
-    }
+map.on('overlayremove', function (eventLayer) {
+	console.log(eventLayer.name  + " off");
+	if (eventLayer.name == "Obesity") {
+		this.removeControl(legend);
+	}else if (eventLayer.name == "City Population"){
+		this.removeControl(legend2);
+	}
 });
-
-map.on('overlayadd', function(eventLayer) {
-    console.log(eventLayer.name + " on");
-    if (eventLayer.name == "Obesity") {
-        legend.addTo(this);
-    } else if (eventLayer.name == "City Population") {
-        legend2.addTo(this);
-    }
+map.on('overlayadd', function (eventLayer) {
+	console.log(eventLayer.name + " on");
+	if (eventLayer.name == "Obesity") {
+		 legend.addTo(this);
+	}else if (eventLayer.name == "City Population"){
+		 legend2.addTo(this);
+	}	
 });
-
-
-//Button to go to iowa
-document.getElementById("iowaBtn").addEventListener("click", iowa);
-
-function iowa() {
-    map.setView(new L.LatLng(37.0902, -95.7129), 7);
-};
-
-
-//Button to go to west virginia
-document.getElementById("wvBtn").addEventListener("click", wv);
-
-function wv() {
-    map.setView(new L.LatLng(38.921511, -80.294105), 7);
-};
-
-
-
-<
-/script>
-
-<
-/html>
+	
+	
+        //Button to go to iowa
+        document.getElementById("iowaBtn").addEventListener("click", iowa);
+        function iowa() {
+            map.setView(new L.LatLng(37.0902,-95.7129), 7);
+        };    
+   
+        //Button to go to west virginia
+        document.getElementById("wvBtn").addEventListener("click", wv);
+        function wv() {
+            map.setView(new L.LatLng(38.921511, -80.294105), 7);
+        };    
+	
+	
+	
+</script>
+</html>
