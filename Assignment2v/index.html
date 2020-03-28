@@ -174,14 +174,17 @@ href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-aweso
     /div>
 
     <
-    div id = 'map' > < /div> <
-    button id = "iowaBtn"
-Look closer at West Virginia < /button> <
+    div id = 'map' > < /div> 
+
+//add image of heart	    
+    <img src="HeartHealth.png"
+      width="400" height="400">
+//Add buttons to locations      
+    < button id = "iowaBtn" > Look closer at West Virginia < /button> <
     button id = "wvBtn" > Look closer at Iowa < /button> <
     /body>
 
-    <
-    script >
+    < script >
     var map = L.map('map').setView([37.0902, -95.7129], 3);
 
 var base = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
