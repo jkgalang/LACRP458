@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <meta name="description" content=" exercise 10">
+    <meta name="description" content=" Assignment 2">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Exercise 10</title>
@@ -11,12 +11,15 @@
     crossorigin=""> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    <script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
+    
     
   <script src="../geojson/usaData"></script>
       <script src="../geojson/counties"></script>
     <script src="../geojson/census-diversity.json"></script>
+<script src="../geojson/us_cities.geojson"></script>
       
     
 <style>
@@ -148,6 +151,8 @@
 </div>
     
     <div id='map'></div>
+	 <button id="iowaBtn"Look closer at West Virginia</button>
+	 <button id="wvBtn">Look closer at Iowa</button>
     </body>
 
 <script>
@@ -157,10 +162,11 @@
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
             id: 'mapbox/streets-v11',
-            accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s3ZHdmYmZnMjQxOTNlcDY5cXc2dml2MCJ9.4sx7-PbFG0R3lILfK4rpOQ' 
+            accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s4OTlwMTVvMDRvYzNsbnRncjNneGc1MSJ9.v6cjjlFdRRAgoGJrSP30yg' 
         }).addTo(map);
    var states=  L.geoJSON(statesData).addTo(map);
-   var uscounties= L.geoJSON(counties).addTo(map);
+   var cities= L.geoJSON(cities).addTo(map);
+   var obesity= L.geoJSON(obesity).addTo(map);
     
     var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 	maxZoom: 19,
@@ -169,13 +175,12 @@
 
 	
 	
-// get color depending on population density value
-	function getColor(d) {
-		return d > 1000 ? '#253494' :
-				d > 500  ? '#2c7fb8' :
-				d > 200  ? '#41b6c4' :
-				d > 100   ? '#7fcdbb' :
-				d > 50   ? '#c7e9b4' :
+// get color depending on rate of obesity 
+	function getColorObesity(d) {
+		return d > 75 ? '#253494' :
+				d > 50  ? '#2c7fb8' :
+				d > 25  ? '#41b6c4' :
+				d > 0   ? '#7fcdbb' :
 							'#ffffcc';
 	}
 
@@ -185,7 +190,7 @@
 			opacity: 1,
 			color: 'white',
 			fillOpacity: 0.7,
-			fillColor: getColor(feature.properties.density)
+			fillColor: getColorObesity(feature.properties.Obesity)
 		};
 	}
 
@@ -228,8 +233,46 @@
 		onEachFeature: onEachFeature
 	}).addTo(map);
 
-	map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
+	map.attributionControl.addAttribution('Obesity Data &copy; <a href="https://catalog.data.gov/dataset/national-obesity-by-state-b181b/">CDC</a>');
 
+	
+//Add graduated symbols for city population	
+function getColorCity(d) {
+		
+				return d > 20000000 ? '#253494' :
+				d > 10000000  ? '#2c7fb8' :
+				d > 5000000  ? '#41b6c4' :
+				d > 1000000  ? '#7fcdbb' :
+				d > 500000   ? '#c7e9b4' :
+							'#ffffcc';
+	}	
+	
+    var minValue = 500000;
+    
+    var minRadius = 5; 
+    
+    L.geoJson(cities, {
+        pointToLayer: function(feature, ll){
+            return L.circleMarker(ll, {
+                color: '#8B0000',
+                opacity: 1,
+                weight: 2,
+                fillColor: '#8B0000',
+                fillOpacity: .6,
+                //radius: 10
+                radius: calcRadius(feature.properties.pop)   
+            });
+        }
+              
+    }).addTo(map);
+    
+    function calcRadius(val) {
+        
+        return 1.0083 * Math.pow(val/minValue,.5716) * minRadius;  
+        
+    }
+	
+//layer control
     var baseLayers = {
     "Basemap 1": base,
     "Basemap 2": OpenStreetMap_HOT
@@ -237,29 +280,30 @@
 
 var overlays = {
     "States": states,
-    "Counties": uscounties,	
+    "Cities": cities,
+    "Obesity": obesity
 };
 	
 L.control.layers(baseLayers, overlays).addTo(map);
 
+
 var legend = L.control({
-  position: 'bottomright'
-	//Possible values are 'topleft', 'topright', 'bottomleft' or 'bottomright'
+  position: 'bottomright'	
 });
 
 legend.onAdd = function(map) {
 
   var div = L.DomUtil.create('div', 'info legend'),
-    levels = [0, 50, 100, 200, 500 ,1000];
+    levels = [0, 25, 50, 75, 100];
 
 	
-	//console.log(feature.length);
 	
-	 div.innerHTML += "<b>Pop Density</b><br>";
+	
+	 div.innerHTML += "<b>Obesity rates</b><br>";
   // loop through items and generate a label with a colored square for each
   for (var i = 0; i < levels.length; i++) {
     div.innerHTML +=
-      '<i style="background:' + getColor(levels[i]+ 1 ) + ' "></i> ' +
+      '<i style="background:' + getColorObesity(levels[i]+ 1 ) + ' "></i> ' +
       levels[i] + (levels[i + 1] ? '&ndash;' + levels[i + 1] + '<br>' : '+');
   }
 
@@ -267,7 +311,68 @@ legend.onAdd = function(map) {
 };
 legend.addTo(map);
 
+//add legend
+
+var legend2 = L.control({
+  position: 'bottomright'
+});
+
+//City population legend
+legend2.onAdd = function(map) {
+
+  var div = L.DomUtil.create('div', 'info legend'),
+    levels2 = [500000, 1000000, 5000000, 10000000, 20000000];
+	
+	 div.innerHTML += "<b>City Population</b><br>";
+  // loop through items and generate a label with a colored square for each
+  for (var i = 0; i < levels.length; i++) {
+    div.innerHTML +=
+      '<i style="background:' + getColorCity(levels2[i]+ 1 ) + ' "></i> ' +
+      levels2[i] + (levels2[i + 1] ? '&ndash;' + levels2[i + 1] + '<br>' : '');
+  }
+
+  return div;
+};
+legend2.addTo(map);
+//Add graduated symbols for city population
+	
+// Add and remove legend from layers when selected in control
+map.on('overlayremove', function (eventLayer) {
+	console.log(eventLayer.name  + " off");
+	if (eventLayer.name == "Obesity") {
+		this.removeControl(legend);
+	}else if (eventLayer.name == "City Population"){
+		this.removeControl(legend2);
+	}
+});
+
+map.on('overlayadd', function (eventLayer) {
+	console.log(eventLayer.name + " on");
+	if (eventLayer.name == "Obesity") {
+		 legend.addTo(this);
+	}else if (eventLayer.name == "City Population"){
+		 legend2.addTo(this);
+	}	
+});
+	
+	
+        //Button to go to iowa
+        document.getElementById("iowaBtn").addEventListener("click", iowa);
+
+        function iowa() {
+            map.setView(new L.LatLng(37.0902,-95.7129), 7);
+        };    
+
    
+        //Button to go to west virginia
+        document.getElementById("wvBtn").addEventListener("click", wv);
+
+        function wv() {
+            map.setView(new L.LatLng(38.921511, -80.294105), 7);
+        };    
+	
+	
+	
 </script>
 
 </html>
