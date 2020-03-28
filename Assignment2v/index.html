@@ -5,16 +5,14 @@
     <meta name="description" content=" Assignment 2">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Exercise 10</title>
+    <title>Assignment 2</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin=""> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
     <script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
-    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-    crossorigin=""></script>
-    
+   
     
   <script src="../geojson/usaData"></script>
     <script src="../geojson/obesity"></script>
@@ -142,7 +140,7 @@
     <div id='map'></div>
 	 <button id="iowaBtn">Look closer at West Virginia</button>
 	 <button id="wvBtn">Look closer at Iowa</button>
-	 <img src="HeartHealth.png"
+	 <img src="../images/HeartHealth.png"
       width="100" height="100">
     </body>
 <script>
@@ -154,7 +152,7 @@
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s4OTlwMTVvMDRvYzNsbnRncjNneGc1MSJ9.v6cjjlFdRRAgoGJrSP30yg' 
         }).addTo(map);
    var states=  L.geoJSON(statesData).addTo(map);
-   var cities= L.geoJSON(cities).addTo(map);
+  // var cities= L.geoJSON(cities).addTo(map);
    var obesity= L.geoJSON(obesity).addTo(map);
     
     var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
@@ -227,7 +225,7 @@ function getColorCity(d) {
     
     var minRadius = 5; 
     
-    L.geoJson(cities, {
+   var cities= L.geoJson(cities, {
         pointToLayer: function(feature, ll){
             return L.circleMarker(ll, {
                 color: '#8B0000',
