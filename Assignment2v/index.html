@@ -293,7 +293,7 @@ legend2.onAdd = function(map) {
 	
 	 div.innerHTML += "<b>City Population</b><br>";
   // loop through items and generate a label with a colored square for each
-  for (var i = 0; i < levels.length; i++) {
+  for (var i = 0; i < levels2.length; i++) {
     div.innerHTML +=
       '<i style="background:' + getColorCity(levels2[i]+ 1 ) + ' "></i> ' +
       levels2[i] + (levels2[i + 1] ? '&ndash;' + levels2[i + 1] + '<br>' : '');
