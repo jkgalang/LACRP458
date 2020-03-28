@@ -184,7 +184,7 @@
 	
 	
 	
-	/*function highlightFeature(e) {
+	function highlightFeature(e) {
 		var layer = e.target;
 		layer.setStyle({
 			weight: 2,
@@ -213,11 +213,11 @@
 	geojson = L.geoJson(statesData, {
 		style: style,
 		onEachFeature: function (feature, layer) {
-    layer.bindPopup('<h1>'+feature.properties.name+'</h1><p>name: '+feature.properties.density+'</p>');
+    layer.bindPopup('<h1>'+feature.properties.name+'</h1>');
   }
 }).addTo(map);
 	
-	map.attributionControl.addAttribution('Obesity Data &copy; <a href="https://catalog.data.gov/dataset/national-obesity-by-state-b181b/">CDC</a>');*/
+	map.attributionControl.addAttribution('Obesity Data &copy; <a href="https://catalog.data.gov/dataset/national-obesity-by-state-b181b/">CDC</a>');
 	
 	
 	
@@ -282,10 +282,7 @@ function getColorCity(d) {
                 fillColor: getColorCity(feature.properties.pop),
                 fillOpacity: .8,
                 //radius: 10
-                radius: calcRadius(feature.properties.pop) 
-		style: style,
-		onEachFeature: function (feature, layer) {
-    layer.bindPopup('<h1>'+feature.properties.name+'</h1>');    
+                radius: calcRadius(feature.properties.pop)    
             });
         }
               
