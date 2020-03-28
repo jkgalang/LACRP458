@@ -1,38 +1,32 @@
-<!DOCTYPE html >
-    < html >
+<!DOCTYPE html>
+<html>
 
-    < head >
-    < meta name = "description" content = " Assignment 2" >
-    < meta charset = "utf-8" >
-    < meta name = "viewport" content = "width=device-width, initial-scale=1" >
-    < title > Assignment 2 < /title>
-    < link rel = "stylesheet"
-href = "https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-integrity = "sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-crossorigin = "" >
-    < link rel = "stylesheet"
-href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
-    <script src = "https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-integrity = "sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-crossorigin = "" > < /script>
+<head>
+    <meta name="description" content=" Assignment 2">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Assignment 2</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
 
 
     <script src = "../geojson/usaData" > < /script> 
     <script src = "../geojson/cities" > < /script>
     <script src = "../geojson/obesity" > < /script>
 
-
-    <
-    style >
-    body {
-        font - family: Verdana
-    }
+<style>
+  body{  font-family: Verdana}
 
 
-    /* Navbar container */
-    .navbar {
-        overflow: hidden;
-        background - color: #117A65;
+/* Navbar container */
+.navbar {
+  overflow: hidden;
+  background-color: #117A65;
   font-family: Verdana;
 }
 
@@ -66,22 +60,22 @@ crossorigin = "" > < /script>
 
 /* Add a background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: # 117 A65;
-    }
-    /* Dropdown content (hidden by default) */
-    .dropdown - content {
-        display: none;
-        position: absolute;
-        background - color: #f9f9f9;
-        min - width: 160 px;
-        box - shadow: 0 px 8 px 16 px 0 px rgba(0, 0, 0, 0.2);
-        z - index: 1;
-    }
+  background-color: #117A65;
+}
+  /* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
 
-    /* Links inside the dropdown */
-    .dropdown - content a {
-        float: none;
-        color: #117A65;
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: #117A65;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -90,20 +84,21 @@ crossorigin = "" > < /script>
 
 /* Add a grey background color to dropdown links on hover */
 .dropdown-content a:hover {
-  background-color: # ddd;
-    }
-
-    /* Show the dropdown menu on hover */
-    .dropdown: hover.dropdown - content {
-        display: block;
-    }
-#map {
-    width: 800 px;
-    height: 600 px;
+  background-color: #ddd;
 }
 
-.legend {
-    line - height: 10 px;
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+  #map {
+    width: 800px;
+	  height: 600px;
+	    z-index:-10
+    }
+    
+  .legend {
+    line-height: 10px;
     color: #555;
 }
 .legend i {
@@ -123,51 +118,47 @@ crossorigin = "" > < /script>
 }
 .info h4 {
     margin: 0 0 5px;
-    color: # 777;
-} <
-/style> <
-/head> <
-body >
-
-    <
-    link rel = "stylesheet"
-href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
-    <
-    div class = "navbar" >
-    <
-    a href = "https://jkgalang.github.io/LACRP458/" > Home < /a> <
-    a href = "https://github.com/jkgalang/LACRP458/" > Class Repository < /a> <
-    div class = "dropdown" >
-    <
-    button class = "dropbtn" > < b > Exercises and Assignments < /b> <
-    i class = "fa fa-caret-down" > < /i> <
-    /button> 
-    < div class = "dropdown-content" >
-    <
-    a href = "https://jkgalang.github.io/LACRP458/exercise1/" > Exercise 1 < /a> <
-    a href = "https://jkgalang.github.io/LACRP458/exercise2/" > Exercise 2 < /a> <
-    a href = "https://github.com/jkgalang/LACRP458/blob/master/exercise3/Iowa_Dams.geojson/" > Exercise 3 < /a> <
-    a href = "https://jkgalang.github.io/LACRP458/Exercise4/#7/42.399/-93.658" > Exercise 4 < /a> <
-    a href = "https://jkgalang.github.io/LACRP458/Assignment1/" > Assignment 1 < /a> <
-    a href = "https://jkgalang.github.io/LACRP458/exercise5/" > Exercise 5 < /a> <
-    a href = "https://jkgalang.github.io/LACRP458/exercise6/" > Exercise 6 < /a> <
-    a href = "https://jkgalang.github.io/LACRP458/exercise7/" > Exercise 7 < /a> <
-    a href = "https://jkgalang.github.io/LACRP458/exercise8/" > Exercise 8 < /a> <
-    a href = "https://jkgalang.github.io/LACRP458/exercise9/" > Exercise 9 < /a> <
-    a href = "https://jkgalang.github.io/LACRP458/exercise10/" > Exercise 10 < /a> 
-    </div> 
-    </div> 
+    color: #777;
+}
+</style>
+</head>
+<body>
+	    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="navbar">
+  <a href="https://jkgalang.github.io/LACRP458/">Home</a>
+  <a href="https://github.com/jkgalang/LACRP458/">Class Repository</a>
+  <div class="dropdown">
+      <button class="dropbtn"><b>Exercises and Assignments</b>
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="https://jkgalang.github.io/LACRP458/exercise1/">Exercise 1</a>
+      <a href="https://jkgalang.github.io/LACRP458/exercise2/">Exercise 2</a>
+      <a href="https://github.com/jkgalang/LACRP458/blob/master/exercise3/Iowa_Dams.geojson/">Exercise 3</a>
+      <a href="https://jkgalang.github.io/LACRP458/Exercise4/#7/42.399/-93.658">Exercise 4</a>
+      <a href="https://jkgalang.github.io/LACRP458/Assignment1/">Assignment 1</a>
+      <a href="https://jkgalang.github.io/LACRP458/exercise5/">Exercise 5</a>
+      <a href="https://jkgalang.github.io/LACRP458/exercise6/">Exercise 6</a>
+      <a href="https://jkgalang.github.io/LACRP458/exercise7/">Exercise 7</a>
+      <a href="https://jkgalang.github.io/LACRP458/exercise8/">Exercise 8</a>
+      <a href="https://jkgalang.github.io/LACRP458/exercise9/">Exercise 9</a>
+      <a href="https://jkgalang.github.io/LACRP458/exercise10/">Exercise 10</a>
     </div>
-
-    <div id = 'map' > < /div> 
-
+  </div>
+</div>
+    
+    <div id='map'></div>
+	    
 //add image of heart	    
     <img src="HeartHealth.png"
       width="400" height="400">
 //Add buttons to locations      
     < button id = "iowaBtn" > Look closer at West Virginia < /button>
     < button id = "wvBtn" > Look closer at Iowa </button> 
-    </body>
+    </body>	    
+    	    
+	   
 
     < script >
     var map = L.map('map').setView([37.0902, -95.7129], 3);
