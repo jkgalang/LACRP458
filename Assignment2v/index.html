@@ -182,6 +182,8 @@
 		};
 	}
 	
+	
+	
 	function highlightFeature(e) {
 		var layer = e.target;
 		layer.setStyle({
@@ -208,15 +210,14 @@
 			click: zoomToFeature
 		});
 	}
-	geojson = L.geoJson(obesity, {
+	geojson = L.geoJson(statesData, {
 		style: style,
 		onEachFeature: function (feature, layer) {
-    layer.bindPopup('<h1>'+feature.properties.Name+'</h1><p>name: '+feature.properties.Obesity+'</p>');
+    layer.bindPopup('<h1>'+feature.properties.name+'</h1><p>name: '+feature.properties.density+'</p>');
   }
 }).addTo(map);
-		
-	map.attributionControl.addAttribution('Obesity Data &copy; <a href="https://catalog.data.gov/dataset/national-obesity-by-state-b181b/">CDC</a>');
 	
+	map.attributionControl.addAttribution('Obesity Data &copy; <a href="https://catalog.data.gov/dataset/national-obesity-by-state-b181b/">CDC</a>');
 	
 	
 	
