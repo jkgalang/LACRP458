@@ -298,7 +298,7 @@ legend2.onAdd = function(map) {
   for (var i = 0; i < levels2.length; i++) {
     div.innerHTML +=
       '<i style="background:' + getColorCity(levels2[i]+ 1 ) + ' "></i> ' +
-      levels2[i] + (levels2[i + 1] ? '&ndash;' + levels2[i + 1] + '<br>' : '');
+      levels2[i] + (levels2[i + 1] ? '&ndash;' + levels2[i + 1] + '<br>' : '+');
   }
   return div;
 };
