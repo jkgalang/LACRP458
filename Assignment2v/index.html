@@ -138,8 +138,8 @@
 </div>
     
     <div id='map'></div>
-	 <button id="iowaBtn">Look closer at West Virginia</button>
-	 <button id="wvBtn">Look closer at Iowa</button>
+	 <button id="wvBtn">Look closer at West Virginia</button>
+	 <button id="iowaBtn">Look closer at Iowa</button>
 	 <img src="../images/HeartHealth.png"
       width="100" height="100">
     </body>
@@ -233,7 +233,7 @@ function getColorCity(d) {
                 color: '#0000FF',
                 opacity: 1,
                 weight: 2,
-                fillColor: '#0000FF',
+                fillColor: getColorCity(feature.properties.pop),
                 fillOpacity: .6,
                 //radius: 10
                 radius: calcRadius(feature.properties.pop)   
@@ -327,7 +327,7 @@ map.on('overlayadd', function (eventLayer) {
         //Button to go to iowa
         document.getElementById("iowaBtn").addEventListener("click", iowa);
         function iowa() {
-            map.setView(new L.LatLng(37.0902,-95.7129), 7);
+            map.setView(new L.LatLng(41.5868,-93.6250), 7);
         };    
    
         //Button to go to west virginia
