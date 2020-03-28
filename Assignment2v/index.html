@@ -184,7 +184,7 @@
 	
 	
 	
-	function highlightFeature(e) {
+	/*function highlightFeature(e) {
 		var layer = e.target;
 		layer.setStyle({
 			weight: 2,
@@ -217,7 +217,9 @@
   }
 }).addTo(map);
 	
-	map.attributionControl.addAttribution('Obesity Data &copy; <a href="https://catalog.data.gov/dataset/national-obesity-by-state-b181b/">CDC</a>');
+	map.attributionControl.addAttribution('Obesity Data &copy; <a href="https://catalog.data.gov/dataset/national-obesity-by-state-b181b/">CDC</a>');*/
+	
+	
 	
 	
 	
@@ -268,6 +270,8 @@ function getColorCity(d) {
     var minValue = 500000;
     
     var minRadius = 5; 
+	
+	
     
    var cities= L.geoJson(cities, {
         pointToLayer: function(feature, ll){
@@ -278,7 +282,10 @@ function getColorCity(d) {
                 fillColor: getColorCity(feature.properties.pop),
                 fillOpacity: .8,
                 //radius: 10
-                radius: calcRadius(feature.properties.pop)   
+                radius: calcRadius(feature.properties.pop) 
+		style: style,
+		onEachFeature: function (feature, layer) {
+    layer.bindPopup('<h1>'+feature.properties.name+'</h1>');    
             });
         }
               
