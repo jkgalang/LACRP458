@@ -10,7 +10,7 @@
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin=""> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
     <script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
    
     
@@ -85,7 +85,7 @@
   #map {
     width: 800px;
 	  height: 600px;
-	
+	z-index: 0;
     }
     
   .legend {
@@ -154,9 +154,9 @@
             id: 'mapbox/streets-v11',
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s4OTlwMTVvMDRvYzNsbnRncjNneGc1MSJ9.v6cjjlFdRRAgoGJrSP30yg' 
         }).addTo(map);
-   var states=  L.geoJSON(statesData).addTo(map);
+  // var states=  L.geoJSON(statesData).addTo(map);
   // var cities= L.geoJSON(cities).addTo(map);
-   var obesity= L.geoJSON(obesity).addTo(map);
+  // var obesity= L.geoJSON(obesity).addTo(map);
     
     var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 	maxZoom: 19,
@@ -186,10 +186,10 @@
 	
 // add popup for state name when clicked on
 	var geojson;
-	geojson = L.geoJson(statesData, {
+	geojson = L.geoJson(obesity, {
 		style: style,
 		onEachFeature: function (feature, layer) {
-    layer.bindPopup('<h1>'+feature.properties.name+'</h1>');
+    layer.bindPopup('<h1>'+feature.properties.Obesity+'</h1>');
   }
 }).addTo(map);
 	
@@ -239,9 +239,9 @@ function getColorCity(d) {
     "Basemap 2": OpenStreetMap_HOT
 };
 var overlays = {
-    "States": states,
+    //"States": states,
     "Cities": cities,
-    "Obesity": obesity
+    "Obesity": geojson
 };
 	
 L.control.layers(baseLayers, overlays).addTo(map);
