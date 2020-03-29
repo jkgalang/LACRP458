@@ -134,6 +134,7 @@
       <a href="https://jkgalang.github.io/LACRP458/exercise8/">Exercise 8</a>
       <a href="https://jkgalang.github.io/LACRP458/exercise9/">Exercise 9</a>
       <a href="https://jkgalang.github.io/LACRP458/exercise10/">Exercise 10</a>
+      <a href="https://jkgalang.github.io/LACRP458/Assignment2v/">Assignment 2</a>
     </div>
   </div>
 </div>
@@ -182,7 +183,7 @@
 		};
 	}
 	
-// add popup for state name when clicked on
+// add popup for obesity rate when clicked on
 	var geojson;
 	geojson = L.geoJson(obesity, {
 		style: style,
@@ -190,9 +191,10 @@
     layer.bindPopup('<h1>'+feature.properties.Obesity+'</h1>');
   }
 }).addTo(map);
-	
-	map.attributionControl.addAttribution('Obesity Data &copy; <a href="https://catalog.data.gov/dataset/national-obesity-by-state-b181b/">CDC</a>');
-	map.attributionControl.addAttribution('City Data &copy; <a href="https://exploratory.io/map/">MIT</a>');
+
+//add map attributions
+map.attributionControl.addAttribution('Obesity Data &copy; <a href="https://catalog.data.gov/dataset/national-obesity-by-state-b181b/">CDC</a>');
+map.attributionControl.addAttribution('City Data &copy; <a href="https://exploratory.io/map/">MIT</a>');
 	
 	
 //Add graduated symbols for city population	
@@ -251,7 +253,6 @@ position: 'bottomright'
 legend.onAdd = function(map) {
   var div = L.DomUtil.create('div', 'info legend'),
     levels = [0, 25, 30, 35];
-	
 	
 	
 	 div.innerHTML += "<b>Obesity rates</b><br>";
