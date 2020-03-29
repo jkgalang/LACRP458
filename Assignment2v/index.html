@@ -168,8 +168,7 @@
 	function getColorObesity(d) {
 		return d > 35 ? '#E31212' :
 			        d > 30  ? '#F77E38' :
-		                d > 25 ? '#FFD366':
-				d > 20  ? '#F8FF66' :
+				d > 25 ? '#F8FF66' :
 				d > 0   ? '#6CFF33' :
 							'#ffffcc';
 	}
@@ -251,7 +250,7 @@ position: 'bottomright'
 });
 legend.onAdd = function(map) {
   var div = L.DomUtil.create('div', 'info legend'),
-    levels = [0, 20, 25, 30, 35];
+    levels = [0, 25, 30, 35];
 	
 	
 	
