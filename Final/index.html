@@ -164,7 +164,7 @@
 	
 	  //map 1 solar potential
 	
-	    var map1 = L.map('map1').setView([37.0902,-95.7129], 9);
+	    var map1 = L.map('map1').setView([37.0902,-95.7129], 3);
 	
 	    var base = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -198,8 +198,8 @@
 	}
 	
 	// add popup for solar pot when clicked on
-	var geojson1;
-	geojson1 = L.geoJson(solarpotential, {
+	var solarpot;
+	solarpot = L.geoJson(solarpotential, {
 		style: style,
 		onEachFeature: function (feature, layer) {
     layer.bindPopup('<h1>'+feature.properties.ANNUAL+'</h1>');
@@ -249,8 +249,8 @@ function getColorWindPot(d) {
 	}
 	
      // add popup for wind pot when clicked on
-     var geojson2;
-     geojson2 = L.geoJson(windPotential, {
+     var windpot;
+     windpot = L.geoJson(windPotential, {
 		style: style,
 		onEachFeature: function (feature, layer) {
      layer.bindPopup('<h1>'+feature.properties.a30+'</h1>');
@@ -278,15 +278,14 @@ legend2.onAdd = function(map1) {
 legend2.addTo(map1);
  
 //layer control
-	//layer control
     var baseLayers = {
     "Basemap 1": base,
     //"Basemap 2": OpenStreetMap_HOT
 };
 var overlays = {
-    //"States": states,
-    "Solar Potential": geojson1,
-    "Wind Potential": geojson2
+    
+    "Solar Potential": solarpot,
+    "Wind Potential": windpot
 };
 	
 L.control.layers(baseLayers, overlays).addTo(map1);
