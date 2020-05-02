@@ -360,7 +360,7 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
 //graduated symbols for MW output of solar plant	
  
     
-  /*function getColorSplants(d) {
+ /* function getColorSplants(d) {
 		
 				return d > 50 ? '#253494' :
 				d > 20 ? '#2c7fb8' :
@@ -368,19 +368,22 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
 				d > 1 ? '#7fcdbb' :
 				d > .3  ? '#c7e9b4' :
 							'#ffffcc';
-	}*/	
-	
+	}	
+	*/
    var minValue = 0.3;
     
    var minRadius = 5; 
 	
-   var splants= L.geoJson(solarplants, {
+  // var splants= //
+       L.geoJson(solarplants, {
         pointToLayer: function(feature, ll){
             return L.circleMarker(ll, {
-                color: grey/*getColorSplants(feature.properties.Solar_MW)*/,
+                color:'#ff7900',
+		   // getColorSplants(feature.properties.Solar_MW),//
                 opacity: 1,
                 weight: 2,
-                fillColor: grey/*getColorSplants(feature.properties.Solar_MW)*/,
+                fillColor: '#ff7900'
+		    //getColorSplants(feature.properties.Solar_MW),//
                 fillOpacity: .8,
                 //radius: 10
                 radius: calcRadius(feature.properties.Solar_MW)    
@@ -389,12 +392,45 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
               
     }).addTo(map2);
      
-    function calcRadius(val) { 
+   function calcRadius(val) { 
         return 1.0083 * Math.pow(val/50,.5716) * minRadius;  
         
     }
+	/*
 //Add nuclear plants
-	 	
+	  function getColorNuclear(d) {
+		
+				return d > 50 ? '#253494' :
+				d > 20 ? '#2c7fb8' :
+				d > 10  ? '#41b6c4' :
+				d > 1 ? '#7fcdbb' :
+				d > .3  ? '#c7e9b4' :
+							'#ffffcc';
+	}	
+	
+   var minValue2 = 600;
+    
+   var minRadius2 = 10; 
+	
+   var nuclear= L.geoJson(nuclear, {
+        pointToLayer: function(feature, ll){
+            return L.circleMarker(ll, {
+                color: getColorNuclear(feature.properties.Nuclear_MW),
+                opacity: 1,
+                weight: 2,
+                fillColor: getColorSplants(feature.properties.Nuclear_MW),
+                fillOpacity: .8,
+                //radius: 10
+                radius: calcRadius2(feature.properties.Nuclear_MW)    
+            });
+        }
+              
+    }).addTo(map2);
+     
+    function calcRadius2(val) { 
+        return 1.0083 * Math.pow(val/minValue2,.5716) * minRadius2;  
+        
+    }	*/
 	
 </script>
 </html>
