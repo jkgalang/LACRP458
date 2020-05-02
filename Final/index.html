@@ -11,11 +11,14 @@
     crossorigin=""> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  
+    <!--load heat plugin-->
     <script src="https://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
    
     
   <script src="../geojson/usaData"></script>
-  <script src="../geojson/SolarPotential"></script>
+  <script src="../geojson/SolarPotential.geojson"></script>
   
       
     
@@ -84,19 +87,19 @@
 }
 	
 /*map and containers*/	
-   #map1container {position:absolute; background-color:#F0F0F0; color:black; text-align:left; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
+   #mapcon1 {position:absolute; background-color:#F0F0F0; color:black; text-align:left; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
             #map1 {position: relative; height: 400px; margin-left:600px;border-left:2px; padding 0; overflow:hidden;}
     
-            #map2container {position:absolute; background-color:#D3D3D3; color:black; text-align:left; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
+            #mapcon2 {position:absolute; background-color:#D3D3D3; color:black; text-align:left; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
             #map2 {position: relative;  height: 400px; margin-left:600px;border-left:2px; padding 0; overflow:hidden;}
        
-            #map3container {position:absolute; background-color:#F0F0F0; color:black; text-align:left; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
+            #mapcon3 {position:absolute; background-color:#F0F0F0; color:black; text-align:left; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
             #map3 {position: relative;  height: 400px; margin-left:600px;border-left:2px; padding 0; overflow:hidden;}
        
-            #map4container {position:absolute; background-color:#D3D3D3; color:black; text-align:center; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
+            #mapcon4 {position:absolute; background-color:#D3D3D3; color:black; text-align:center; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
             #map4 {position: relative;  height: 400px; margin-left:600px;border-left:2px; padding 0; overflow:hidden;}
        
-            #map5container {position:absolute; background-color:#F0F0F0; color:black; text-align:center; margin-right: 0px; margin-left:0px; width:99.9%; height:400px;padding 0; }
+            #mapcon5 {position:absolute; background-color:#F0F0F0; color:black; text-align:center; margin-right: 0px; margin-left:0px; width:99.9%; height:400px;padding 0; }
 
     
 	
@@ -154,7 +157,72 @@
 	
 
 	    
-    <div id='map'></div>
+  <div id='mapcon1'>
+            <h2>Solar power potential of the United States</h2>
+            <p>This map shows the potential for solar power production across the United States. It can be helpful in deciding the best areas of the country to put solar power fields.</p>
+            </div>    
+            <div id="map1"></div>
 	 
     </body>
 <script>
+	
+	  //map 1 solar potential
+	
+	    var map1 = L.map('map1').setView([37.0902,-95.7129], 5);
+	
+	    var base = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cHV1dG1uMGQxbDNscDRtdGRvd3V2NiJ9.amY6XFxTEVSdsnsiyrBQLg' 
+        }).addTo(map);
+	
+	var SolPot=  L.geoJSON(solarpotential).addTo(map);
+	
+	// get color depending on solar potential
+	function getColorSolPot(d) {
+		return d > 6 ? '#932916 ' :
+				d > 5 ? '##C3361E' :
+				d > 4.5 ? '#DA4B32' :
+				d > 4 ? '#F5735C' :
+				d > 3 ? '#F0935E' :
+			        d > 2 ? '#F7B781' :
+				d > 1 ? '#FCEBC4' :
+				d > 0   ? '#FCFCD7' :
+							'#ffffcc';
+	}
+	function style(feature) {
+		return {
+			weight: 1,
+			opacity: 1,
+			color: 'white',
+			fillOpacity: 0.7,
+			fillColor: getColorSolPot(feature.properties.ANNUAL)
+		};
+	}
+	
+//Solar potenetial legend
+		
+var legend1 = L.control({
+position: 'bottomright'	
+});
+legend1.onAdd = function(map) {
+  var div = L.DomUtil.create('div', 'info legend'),
+    levels = [0, 1, 2, 3, 4, 4.5, 5, 6];
+	
+	 div.innerHTML += "<b>Solar Potential</b><br>";
+// loop through items and generate a label with a colored square for each
+  for (var i = 0; i < levels.length; i++) {
+    div.innerHTML +=
+      '<i style="background:' + getColorSolPot(levels[i]+ 1 ) + ' "></i> ' +
+      levels[i] + (levels[i + 1] ? '&ndash;' + levels[i + 1] + '<br>' : '+');
+  }
+  return div;
+};
+legend1.addTo(map);
+	
+	
+	
+	
+</script>
+</html>
