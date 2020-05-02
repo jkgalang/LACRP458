@@ -374,11 +374,11 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
     
    var minRadius = 5; 
 	
-  // var splants= //
-       L.geoJson(solarplants, {
+   var splants=  L.geoJson(solarplants, {
         pointToLayer: function(feature, ll){
             return L.circleMarker(ll, {
-                color:'#ff7900',
+                color:'#000000',
+		   // '#ff7900',//
 		   // getColorSplants(feature.properties.Solar_MW),//
                 opacity: 1,
                 weight: 2,
