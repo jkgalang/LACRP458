@@ -293,11 +293,11 @@ var overlays = {
     "Wind Potential": geojson2
 };
 	
-L.control.layers(baseLayers, overlays).addTo(map);
+L.control.layers(baseLayers, overlays).addTo(map1);
 
 
 // legend control to add and remove legend from layers when selected in control
-map.on('overlayremove', function (eventLayer) {
+map1.on('overlayremove', function (eventLayer) {
 	console.log(eventLayer.name  + " off");
 	if (eventLayer.name == "Solar Potential") {
 		this.removeControl(legend1);
@@ -305,7 +305,7 @@ map.on('overlayremove', function (eventLayer) {
 		this.removeControl(legend2);
 	}
 });
-map.on('overlayadd', function (eventLayer) {
+map1.on('overlayadd', function (eventLayer) {
 	console.log(eventLayer.name + " on");
 	if (eventLayer.name == "Solar Potential") {
 		 legend1.addTo(this);
