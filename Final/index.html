@@ -325,6 +325,7 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cTM2cWNnMGdlZjNsbzNoYmNnZ2UxMSJ9.fu3hf2aNPWQgx3Hug_T3Yw' 
         }).addTo(map2);
 	
+	var splalnts=  L.geoJSON(solarplants).addTo(map1);
 	
 //graduated symbols for MW output of solar plant	
  var minValue = 0.03;
