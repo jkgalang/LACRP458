@@ -176,15 +176,15 @@
 	//var SolPot=  L.geoJSON(solarpotential).addTo(map1);
 	
 	// get color depending on solar potential
-	function getColorSolPot(d) {
-		return d > 6.5 ? '#932916 ' :
-				d >6 ? '##C3361E' :
-				d > 5.5 ? '#DA4B32' :
-				d > 5 ? '#F5735C' :
-				d > 4.5 ? '#F0935E' :
-			        d > 4 ? '#F7B781' :
-				d > 3 ? '#FCEBC4' :
-				d > 2  ? '#FCFCD7' :
+	function getColorSolPot(e) {
+		return e > 6.5 ? '#932916 ' :
+				e >6 ? '##C3361E' :
+				e > 5.5 ? '#DA4B32' :
+				e > 5 ? '#F5735C' :
+				e > 4.5 ? '#F0935E' :
+			        e > 4 ? '#F7B781' :
+				e > 3 ? '#FCEBC4' :
+				e > 2  ? '#FCFCD7' :
 							'#ffffcc';
 	}
 	function style(feature) {
