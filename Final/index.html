@@ -175,9 +175,9 @@
             maxZoom: 18,
             id: 'mapbox/streets-v11',
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cHV1dG1uMGQxbDNscDRtdGRvd3V2NiJ9.amY6XFxTEVSdsnsiyrBQLg' 
-        }).addTo(map);
+        }).addTo(map1);
 	
-	var SolPot=  L.geoJSON(solarpotential).addTo(map);
+	var SolPot=  L.geoJSON(solarpotential).addTo(map1);
 	
 	// get color depending on solar potential
 	function getColorSolPot(d) {
@@ -206,7 +206,7 @@
 var legend1 = L.control({
 position: 'bottomright'	
 });
-legend1.onAdd = function(map) {
+legend1.onAdd = function(map1) {
   var div = L.DomUtil.create('div', 'info legend'),
     levels = [0, 1, 2, 3, 4, 4.5, 5, 6];
 	
@@ -219,7 +219,7 @@ legend1.onAdd = function(map) {
   }
   return div;
 };
-legend1.addTo(map);
+legend1.addTo(map1);
 	
 	
 	
