@@ -177,7 +177,7 @@
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cHV1dG1uMGQxbDNscDRtdGRvd3V2NiJ9.amY6XFxTEVSdsnsiyrBQLg' 
         }).addTo(map1);
 	
-	var SolPot=  L.geoJSON(solarpotential).addTo(map1);
+	//var SolPot=  L.geoJSON(solarpotential).addTo(map1);
 	
 	// get color depending on solar potential
 	function getColorSolPot(d) {
@@ -200,6 +200,15 @@
 			fillColor: getColorSolPot(feature.properties.ANNUAL)
 		};
 	}
+	
+	// add popup for solar pot when clicked on
+	var geojson;
+	geojson1 = L.geoJson(solarpotential, {
+		style: style,
+		onEachFeature: function (feature, layer) {
+    layer.bindPopup('<h1>'+feature.properties.ANNUAL+'</h1>');
+  }
+}).addTo(map1);
 	
 //Solar potenetial legend
 		
