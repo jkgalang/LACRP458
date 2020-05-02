@@ -21,6 +21,8 @@
   <script src="../geojson/SolarPotential.geojson"></script>
   <script src="../geojson/windPotential.json"></script>
   <script src="../geojson/solarplants.geojson"></script>
+  <script src="../geojson/nuclear.geojson"></script>
+	
       
     
 <style>
@@ -365,8 +367,8 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
 				d > 10  ? '#41b6c4' :
 				d > 1 ? '#7fcdbb' :
 				d > .3  ? '#c7e9b4' :
-							'#ffffcc';*/
-	}	
+							'#ffffcc';
+	}*/	
 	
    var minValue = 0.3;
     
@@ -391,6 +393,7 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
         return 1.0083 * Math.pow(val/50,.5716) * minRadius;  
         
     }
+//Add nuclear plants
 	 	
 	
 </script>
