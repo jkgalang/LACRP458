@@ -326,7 +326,7 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
         }).addTo(map2);
 	
 	
-	
+	/*
 	 var SPlantMarkerOptions = {
             fillColor: "gray",
             color: "#000",
@@ -351,14 +351,14 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
 
         function addPopups(feature, layer) {
             layer.bindPopup('<b>'+feature.properties.Utility_Na +'</b><br> MW solar output ' + feature.properties.Solar_MW);
-        }
+        }*/
 	
 	//var splalnts=  L.geoJSON(solarplants).addTo(map2);
 	
 //graduated symbols for MW output of solar plant	
  
     
- /*  function getColorSplants(d) {
+  function getColorSplants(d) {
 		
 				return d > 50 ? '#253494' :
 				d > 20 ? '#2c7fb8' :
@@ -390,7 +390,7 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
     function calcRadius(val) { 
         return 1.0083 * Math.pow(val/minValue,.5716) * minRadius;  
         
-    }*/
+    }
 	 	
 	
 </script>
