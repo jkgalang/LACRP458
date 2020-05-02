@@ -177,15 +177,12 @@
 	
 	// get color depending on solar potential
 	function getColorSolPot(d) {
-		return d > 6.5 ? '#932916 ' :
-				d >6 ? '##C3361E' :
-				d > 5.5 ? '#DA4B32' :
-				d > 5 ? '#F5735C' :
-				d > 4.5 ? '#F0935E' :
-			        d > 4 ? '#F7B781' :
-				d > 3 ? '#FCEBC4' :
-				d > 2  ? '#FCFCD7' :
-							'#ffffcc';
+		return d > 6 ? '#8B2E21 ' :
+				d > 5 ? '#CA5040' :
+			        d > 4 ? '#E57060' :
+				d > 3 ? '#F2A078' :
+				d > 2  ? '#F3CAB5' :
+							'#F3E4E2';
 	}
 	function style1(feature) {
 		return {
@@ -241,9 +238,9 @@ function getColorWindPot(d) {
 	}
 	function style(feature) {
 		return {
-			weight: 0,
+			weight: 0.25,
 			opacity: 1,
-			color: 'black',
+			color: getColorWindPot(feature.properties.a30),
 			fillOpacity: 0.7,
 			fillColor: getColorWindPot(feature.properties.a30)
 		};
