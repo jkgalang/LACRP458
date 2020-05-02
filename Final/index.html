@@ -325,12 +325,40 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cTM2cWNnMGdlZjNsbzNoYmNnZ2UxMSJ9.fu3hf2aNPWQgx3Hug_T3Yw' 
         }).addTo(map2);
 	
+	
+	
+	 var SPlantMarkerOptions = {
+            fillColor: "gray",
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        };     
+
+
+        myPointMakers = L.geoJSON(solarplants, {
+            onEachFeature: addPopups,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, SplantMarkerOptions);
+            },
+            style: function(feature) {
+                return {
+                  radius: feature.properties.Solar_MW,
+                };
+            }
+        }).addTo(map2);
+
+
+        function addPopups(feature, layer) {
+            layer.bindPopup('<b>'+feature.properties.Utility_Na +'</b><br> MW solar output ' + feature.properties.Solar_MW);
+        }
+	
 	//var splalnts=  L.geoJSON(solarplants).addTo(map2);
 	
 //graduated symbols for MW output of solar plant	
  
     
-   function getColorSplants(d) {
+ /*  function getColorSplants(d) {
 		
 				return d > 50 ? '#253494' :
 				d > 20 ? '#2c7fb8' :
@@ -353,7 +381,7 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
                 fillColor: getColorSplants(feature.properties.Solar_MW),
                 fillOpacity: .8,
                 //radius: 10
-                radius: calcRadius(feature.properties.pop)    
+                radius: calcRadius(feature.properties.Solar_MW)    
             });
         }
               
@@ -362,7 +390,7 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
     function calcRadius(val) { 
         return 1.0083 * Math.pow(val/minValue,.5716) * minRadius;  
         
-    }
+    }*/
 	 	
 	
 </script>
