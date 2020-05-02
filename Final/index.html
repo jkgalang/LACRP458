@@ -162,7 +162,7 @@
 	
  <div id='mapcon2'>
 	 <h2>Solar power plants in the United States</h2>
-            <p>This map shows the potential for solar and wind power production across the United States. It can be helpful in deciding the best areas of the country to put solar power fields or wind farms.</p>
+            <p>This map shows the locations of solar power plants in the United States. It illustrates the MW output of each plant represented by the size of the circe.</p>
             </div>   
 	    <div id="map2"></div>
     </body>
@@ -325,32 +325,45 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cTM2cWNnMGdlZjNsbzNoYmNnZ2UxMSJ9.fu3hf2aNPWQgx3Hug_T3Yw' 
         }).addTo(map2);
 	
-	var splalnts=  L.geoJSON(solarplants).addTo(map2);
+	//var splalnts=  L.geoJSON(solarplants).addTo(map2);
 	
 //graduated symbols for MW output of solar plant	
- var minValue = 0.03;
+ 
+    
+   function getColorSplants(d) {
+		
+				return d > 50 ? '#253494' :
+				d > 20 ? '#2c7fb8' :
+				d > 10  ? '#41b6c4' :
+				d > 1 ? '#7fcdbb' :
+				d > .3  ? '#c7e9b4' :
+							'#ffffcc';
+	}	
+	
+   var minValue = 0.3;
     
    var minRadius = 5; 
 	
-   var solplant= L.geoJson(solplant, {
+   var splants= L.geoJson(solarplants, {
         pointToLayer: function(feature, ll){
             return L.circleMarker(ll, {
-                color: blue,
+                color: getColorSplants(feature.properties.Solar_MW),
                 opacity: 1,
                 weight: 2,
-                fillColor: blue,
+                fillColor: getColorSplants(feature.properties.Solar_MW),
                 fillOpacity: .8,
                 //radius: 10
-                radius: calcRadius(feature.properties.Solar_MW)    
+                radius: calcRadius(feature.properties.pop)    
             });
         }
               
     }).addTo(map2);
-    
-    function calcRadius(val) {
-        
+     
+    function calcRadius(val) { 
         return 1.0083 * Math.pow(val/minValue,.5716) * minRadius;  
         
     }
+	 	
+	
 </script>
 </html>
