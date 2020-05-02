@@ -19,7 +19,7 @@
     
   <script src="../geojson/usaData"></script>
   <script src="../geojson/SolarPotential.geojson"></script>
-  
+  <script src="../geojson/windPotential.json"></script>
       
     
 <style>
@@ -158,7 +158,7 @@
 
 	    
   <div id='mapcon1'>
-            <h2>Solar power potential of the United States</h2>
+            <h2>Solar and wind potential of the United States</h2>
             <p>This map shows the potential for solar power production across the United States. It can be helpful in deciding the best areas of the country to put solar power fields.</p>
             </div>    
             <div id="map1"></div>
@@ -181,14 +181,14 @@
 	
 	// get color depending on solar potential
 	function getColorSolPot(d) {
-		return d > 6 ? '#932916 ' :
-				d > 5 ? '##C3361E' :
-				d > 4.5 ? '#DA4B32' :
-				d > 4 ? '#F5735C' :
-				d > 3 ? '#F0935E' :
-			        d > 2 ? '#F7B781' :
-				d > 1 ? '#FCEBC4' :
-				d > 0   ? '#FCFCD7' :
+		return d > 6.5 ? '#932916 ' :
+				d >6 ? '##C3361E' :
+				d > 5.5 ? '#DA4B32' :
+				d > 5 ? '#F5735C' :
+				d > 4.5 ? '#F0935E' :
+			        d > 4 ? '#F7B781' :
+				d > 3 ? '#FCEBC4' :
+				d > 2  ? '#FCFCD7' :
 							'#ffffcc';
 	}
 	function style(feature) {
@@ -217,7 +217,7 @@ position: 'bottomright'
 });
 legend1.onAdd = function(map1) {
   var div = L.DomUtil.create('div', 'info legend'),
-    levels = [0, 1, 2, 3, 4, 4.5, 5, 6];
+    levels = [2, 3, 4, 4.5, 5, 5.5, 6, 6.5];
 	
 	 div.innerHTML += "<b>Solar Potential</b><br>";
 // loop through items and generate a label with a colored square for each
@@ -230,7 +230,56 @@ legend1.onAdd = function(map1) {
 };
 legend1.addTo(map1);
 	
+//add wind potential graduated colors
+function getColorWindPot(d) {
+		return d > 500 ? '#932916 ' :
+				d >400 ? '##C3361E' :
+				d > 300 ? '#DA4B32' :
+				d > 200 ? '#F5735C' :
+				d > 100 ? '#F0935E' :
+			        d > 50 ? '#F7B781' :
+				d > 10 ? '#FCEBC4' :
+				d > 0  ? '#FCFCD7' :
+							'#ffffcc';
+	}
+	function style(feature) {
+		return {
+			weight: 0.25,
+			opacity: 1,
+			color: 'black',
+			fillOpacity: 0.7,
+			fillColor: getColorWindPot(feature.properties.a30)
+		};
+	}
 	
+     // add popup for wind pot when clicked on
+     var geojson2;
+     geojson2 = L.geoJson(windPotential, {
+		style: style,
+		onEachFeature: function (feature, layer) {
+     layer.bindPopup('<h1>'+feature.properties.a30+'</h1>');
+     }
+     }).addTo(map1);	
+	
+//wind potential legend
+var legend2 = L.control({
+position: 'bottomright'	
+});
+
+legend2.onAdd = function(map1) {
+  var div = L.DomUtil.create('div', 'info legend'),
+    levels = [1, 10, 50, 100, 200, 300, 400, 500];
+	
+	 div.innerHTML += "<b>Wind Potential</b><br>";
+// loop through items and generate a label with a colored square for each
+  for (var i = 0; i < levels.length; i++) {
+    div.innerHTML +=
+      '<i style="background:' + getColorWindPot(levels[i]+ 1 ) + ' "></i> ' +
+      levels[i] + (levels[i + 1] ? '&ndash;' + levels[i + 1] + '<br>' : '+');
+  }
+  return div;
+};
+legend1.addTo(map1);
 	
 	
 </script>
