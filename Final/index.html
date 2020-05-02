@@ -15,6 +15,7 @@
    
     
   <script src="../geojson/usaData"></script>
+  <script src="../geojson/SolarPotential"></script>
   
       
     
@@ -81,12 +82,25 @@
 .dropdown:hover .dropdown-content {
   display: block;
 }
-  #map {
-    width: 800px;
-	  height: 600px;
-	z-index: 0;
-    }
+	
+/*map and containers*/	
+   #map1container {position:absolute; background-color:#F0F0F0; color:black; text-align:left; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
+            #map1 {position: relative; height: 400px; margin-left:600px;border-left:2px; padding 0; overflow:hidden;}
     
+            #map2container {position:absolute; background-color:#D3D3D3; color:black; text-align:left; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
+            #map2 {position: relative;  height: 400px; margin-left:600px;border-left:2px; padding 0; overflow:hidden;}
+       
+            #map3container {position:absolute; background-color:#F0F0F0; color:black; text-align:left; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
+            #map3 {position: relative;  height: 400px; margin-left:600px;border-left:2px; padding 0; overflow:hidden;}
+       
+            #map4container {position:absolute; background-color:#D3D3D3; color:black; text-align:center; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
+            #map4 {position: relative;  height: 400px; margin-left:600px;border-left:2px; padding 0; overflow:hidden;}
+       
+            #map5container {position:absolute; background-color:#F0F0F0; color:black; text-align:center; margin-right: 0px; margin-left:0px; width:99.9%; height:400px;padding 0; }
+
+    
+	
+/*legends*/
   .legend {
     line-height: 10px;
     color: #555;
