@@ -188,7 +188,7 @@
 	
 	  //map 1 solar potential
 	
-	    var map1 = L.map('map1').setView([37.0902,-95.7129], 3);
+	    var map1 = L.map('map1').setView([37.0902,-95.7129], 4);
 	
 	    var base = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -253,13 +253,13 @@ legend1.addTo(map1);
 //add wind potential graduated colors
 function getColorWindPot(d) {
 		return d > 500 ? '#154360 ' :
-				d >400 ? '#21618C' :
-				d > 300 ? '#3498DB' :
-				d > 200 ? '#5DADE2' :
-				d > 100 ? '#85C1E91' :
-			        d > 50 ? '#D6EAF8' :
-				d > 10 ? '#AED6F1' :
-				d > 0  ? '#F8F9F9' :
+				d >400 ? '#1A5276' :
+				d > 300 ? '#2471A3' :
+				d > 200 ? '#5499C7' :
+				d > 100 ? '#7FB3D5' :
+			        d > 50 ? '#A9CCE3' :
+				d > 10 ? '#D4E6F1' :
+				d > 0  ? '#EAF2F8' :
 		
 		
 							'#ffffcc';
@@ -357,48 +357,7 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
 });
 	
-	/*
-	 var SPlantMarkerOptions = {
-            fillColor: "gray",
-            color: "#000",
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 0.8
-        };     
-
-
-        myPointMakers = L.geoJSON(solarplants, {
-            onEachFeature: addPopups,
-            pointToLayer: function (feature, latlng) {
-                return L.circleMarker(latlng, SplantMarkerOptions);
-            },
-            style: function(feature) {
-                return {
-                  radius: feature.properties.Solar_MW,
-                };
-            }
-        }).addTo(map2);
-
-
-        function addPopups(feature, layer) {
-            layer.bindPopup('<b>'+feature.properties.Utility_Na +'</b><br> MW solar output ' + feature.properties.Solar_MW);
-        }*/
 	
-	//var splalnts=  L.geoJSON(solarplants).addTo(map2);
-	
-//graduated symbols for MW output of solar plant	
- 
-    
- /* function getColorSplants(d) {
-		
-				return d > 50 ? '#253494' :
-				d > 20 ? '#2c7fb8' :
-				d > 10  ? '#41b6c4' :
-				d > 1 ? '#7fcdbb' :
-				d > .3  ? '#c7e9b4' :
-							'#ffffcc';
-	}	
-	*/
    var minValue = 0.3;
     
    var minRadius = 5; 
@@ -576,13 +535,11 @@ var map4 = L.map('map4').setView([37.0902,-95.7129], 2.5);
 	
 $.getJSON("https://jkgalang.github.io/LACRP458/geojson/WindTurbines.geojson", function(data) {
     var coords = data.features.map(feat => feat.geometry.coordinates.slice().reverse())
-    var heat = L.heatLayer(coords).addTo(map4); //all default options - customizable options below
+    var heat = L.heatLayer(coords).addTo(map4); 
 });
 	
 
  
-
-
 	
 </script>
 </html>
