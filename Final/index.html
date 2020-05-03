@@ -197,6 +197,8 @@
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cHV1dG1uMGQxbDNscDRtdGRvd3V2NiJ9.amY6XFxTEVSdsnsiyrBQLg' 
         }).addTo(map1);
 	
+	var states1=  L.geoJSON(statecon).addTo(map1);
+	
 	//var SolPot=  L.geoJSON(solarpotential).addTo(map1);
 	
 	// get color depending on solar potential
@@ -305,7 +307,7 @@ legend2.addTo(map1);
     //"Basemap 2": OpenStreetMap_HOT
 };
 var overlays = {
-    
+    "States": states1,
     "Solar Potential": solarpot,
     "Wind Potential": windpot
 };
@@ -570,7 +572,7 @@ var map4 = L.map('map4').setView([37.0902,-95.7129], 2.5);
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cmJ3dHoxMHNzbjNsbzN1dW40NjczcCJ9.r6R4QNVlUJU_PkfIwVilSA' 
         }).addTo(map4);	
 	
-$.getJSON("https://github.com/jkgalang/LACRP458/blob/master/geojson/WindTurbines.geojson", function(data) {
+$.getJSON("https://jkgalang.github.io/LACRP458/geojson/WindTurbines.geojson", function(data) {
     var coords = data.features.map(feat => feat.geometry.coordinates.slice().reverse())
     var heat = L.heatLayer(coords).addTo(map4); //all default options - customizable options below
 });
