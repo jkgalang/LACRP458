@@ -525,6 +525,17 @@ var map3 = L.map('map3').setView([37.0902,-95.7129], 3);
 		onEachFeature: onEachFeature
 	}).addTo(map3);
 	
+	
+// add popup for energy consumed when clicked on
+     var con;
+     con = L.geoJson(statecon, {
+		style: style,
+		onEachFeature: function (feature, layer) {
+     layer.bindPopup('<h1>'+feature.properties.EnergyConsumed+'</h1>');
+     }
+     }).addTo(map3);	
+	
+	
 //energy consumption legend
 var legend3 = L.control({
 position: 'bottomright'	
@@ -544,6 +555,8 @@ legend2.onAdd = function(map3) {
   return div;
 };
 legend2.addTo(map3);
+	
+
  
 
 
