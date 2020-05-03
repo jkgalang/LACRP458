@@ -22,6 +22,7 @@
   <script src="../geojson/windPotential.json"></script>
   <script src="../geojson/solarplants.geojson"></script>
   <script src="../geojson/nuclear.geojson"></script>
+  <script src="../geojson/WindTurbines.geojson"></script> 	
 	
 	
       
@@ -161,6 +162,7 @@
   <div id='mapcon1'>
             <h2>Solar and wind potential of the United States</h2>
             <p>This map shows the potential for solar and wind power production across the United States. It can be helpful in deciding the best areas of the country to put solar power fields or wind farms.</p>
+	    <button id="iowaBtn">Look closer at Iowa</button>
             </div>    
             <div id="map1"></div>
 	
@@ -175,6 +177,11 @@
             <p>This map shows the energy consumption of each state per capita. .</p>
             </div>   
 	    <div id="map3"></div>
+<div id='mapcon4'>
+	 <h2>Heat map of wind turbines in the United States</h2>
+            <p>This map illustrates where wind turbines are located in the United States.</p>
+            </div>   
+	    <div id="map4"></div>
 	
     </body>
 <script>
@@ -189,6 +196,8 @@
             id: 'mapbox/streets-v11',
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cHV1dG1uMGQxbDNscDRtdGRvd3V2NiJ9.amY6XFxTEVSdsnsiyrBQLg' 
         }).addTo(map1);
+	
+	var states1=  L.geoJSON(statecon).addTo(map1);
 	
 	//var SolPot=  L.geoJSON(solarpotential).addTo(map1);
 	
@@ -298,7 +307,7 @@ legend2.addTo(map1);
     //"Basemap 2": OpenStreetMap_HOT
 };
 var overlays = {
-    
+    "States": states1,
     "Solar Potential": solarpot,
     "Wind Potential": windpot
 };
@@ -323,7 +332,12 @@ map1.on('overlayadd', function (eventLayer) {
 		 legend2.addTo(this);
 	}	
 });
-	
+
+//button to go to iowa
+ document.getElementById("iowaBtn").addEventListener("click", iowa);
+        function iowa() {
+            map1.setView(new L.LatLng(41.5868,-93.6250), 7);
+        };    
 	
 //Map 2
 	
@@ -454,7 +468,7 @@ L.control.layers(baseLayers, overlays).addTo(map2);
 //Map 3
 //used geojson.io to add data to original geojson file
 	
-var map3 = L.map('map3').setView([37.0902,-95.7129], 3);
+var map3 = L.map('map3').setView([37.0902,-95.7129], 2.5);
 	
 	    var base = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -526,22 +540,12 @@ var map3 = L.map('map3').setView([37.0902,-95.7129], 3);
 	}).addTo(map3);
 	
 	
-// add popup for energy consumed when clicked on
-     var con;
-     con = L.geoJson(statecon, {
-		style: style,
-		onEachFeature: function (feature, layer) {
-     layer.bindPopup('<h1>'+feature.properties.EnergyConsumed+'</h1>');
-     }
-     }).addTo(map3);	
-	
-	
 //energy consumption legend
 var legend3 = L.control({
 position: 'bottomright'	
 });
 
-legend2.onAdd = function(map3) {
+legend3.onAdd = function(map3) {
   var div = L.DomUtil.create('div', 'info legend'),
     levels = [100, 250, 400, 600];
 	
@@ -554,7 +558,24 @@ legend2.onAdd = function(map3) {
   }
   return div;
 };
-legend2.addTo(map3);
+legend3.addTo(map3);
+	
+	
+//map 4 wind energy heat map
+	
+var map4 = L.map('map4').setView([37.0902,-95.7129], 2.5);
+	
+	    var base = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cmJ3dHoxMHNzbjNsbzN1dW40NjczcCJ9.r6R4QNVlUJU_PkfIwVilSA' 
+        }).addTo(map4);	
+	
+$.getJSON("https://jkgalang.github.io/LACRP458/geojson/WindTurbines.geojson", function(data) {
+    var coords = data.features.map(feat => feat.geometry.coordinates.slice().reverse())
+    var heat = L.heatLayer(coords).addTo(map4); //all default options - customizable options below
+});
 	
 
  
