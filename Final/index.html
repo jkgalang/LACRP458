@@ -252,14 +252,16 @@ legend1.addTo(map1);
 
 //add wind potential graduated colors
 function getColorWindPot(d) {
-		return d > 500 ? '#932916 ' :
-				d >400 ? '##C3361E' :
-				d > 300 ? '#DA4B32' :
-				d > 200 ? '#F5735C' :
-				d > 100 ? '#F0935E' :
-			        d > 50 ? '#F7B781' :
-				d > 10 ? '#FCEBC4' :
-				d > 0  ? '#FCFCD7' :
+		return d > 500 ? '#154360 ' :
+				d >400 ? '#21618C' :
+				d > 300 ? '#3498DB' :
+				d > 200 ? '#5DADE2' :
+				d > 100 ? '#85C1E91' :
+			        d > 50 ? '#D6EAF8' :
+				d > 10 ? '#AED6F1' :
+				d > 0  ? '#F8F9F9' :
+		
+		
 							'#ffffcc';
 	}
 	function style(feature) {
