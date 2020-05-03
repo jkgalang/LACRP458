@@ -371,14 +371,14 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
    var splants=  L.geoJson(solarplants, {
         pointToLayer: function(feature, ll){
             return L.circleMarker(ll, {
-                color:'#A6917C',
+                color:'#ff7900',
 		   // '#ff7900',//
 		   // getColorSplants(feature.properties.Solar_MW),//
                 opacity: .8,
                 weight: 2,
                 fillColor: '#ff7900',
 		    //getColorSplants(feature.properties.Solar_MW),//
-                fillOpacity: .8,
+                fillOpacity: .5,
                 //radius: 10
                 radius: calcRadius(feature.properties.Solar_MW)    
             });
@@ -405,7 +405,7 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
                 opacity: .8,
                 weight: 2,
                 fillColor: '#840B0B',
-                fillOpacity: .8,
+                fillOpacity: .5,
                 //radius: 10
                 radius: calcRadius2(feature.properties.Nuclear_MW)    
             });
