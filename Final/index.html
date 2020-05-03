@@ -203,6 +203,9 @@
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cHV1dG1uMGQxbDNscDRtdGRvd3V2NiJ9.amY6XFxTEVSdsnsiyrBQLg' 
         }).addTo(map1);
 	
+	//add atribution
+	map1.attributionControl.addAttribution('Solar and Wind Data &copy; <a href="https://openei.org">https://openei.org</a>');
+	
 	var states1=  L.geoJSON(statecon).addTo(map1);
 	
 	//var SolPot=  L.geoJSON(solarpotential).addTo(map1);
@@ -363,6 +366,8 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
 });
 	
+	//add atribution
+	map2.attributionControl.addAttribution('Solar and nuclear plants &copy; <a href="https://www.eia.gov/maps/">EIA</a>');
 	
    var minValue = 0.3;
     
@@ -445,6 +450,9 @@ var map3 = L.map('map3').setView([37.0902,-95.7129], 2.5);
         }).addTo(map3);
 	
 
+	//add atribution
+	map3.attributionControl.addAttribution('Energy Data &copy; <a href="https://www.eia.gov/">EIA</a>');
+	
 	var states=  L.geoJSON(statecon).addTo(map3);
 	
 	// get color depending on population energy consumption
@@ -538,6 +546,9 @@ var map4 = L.map('map4').setView([37.0902,-95.7129], 2.5);
             id: 'mapbox/streets-v11',
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cmJ3dHoxMHNzbjNsbzN1dW40NjczcCJ9.r6R4QNVlUJU_PkfIwVilSA' 
         }).addTo(map4);	
+	
+	//add atribution
+	map4.attributionControl.addAttribution('Wind Turbine Data &copy; <a href="https://www.sciencebase.gov/">USGS</a>');
 	
 $.getJSON("https://jkgalang.github.io/LACRP458/geojson/WindTurbines.geojson", function(data) {
     var coords = data.features.map(feat => feat.geometry.coordinates.slice().reverse())
