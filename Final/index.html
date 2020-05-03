@@ -543,6 +543,9 @@ $.getJSON("https://jkgalang.github.io/LACRP458/geojson/WindTurbines.geojson", fu
     var coords = data.features.map(feat => feat.geometry.coordinates.slice().reverse())
     var heat = L.heatLayer(coords).addTo(map4); 
 });
+	 L.marker([42.026389, -93.646389]).addTo(map4)
+            .bindPopup("Iowa State University")
+            .openPopup();
 	
 
  
