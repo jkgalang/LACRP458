@@ -327,6 +327,10 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cTM2cWNnMGdlZjNsbzNoYmNnZ2UxMSJ9.fu3hf2aNPWQgx3Hug_T3Yw' 
         }).addTo(map2);
 	
+	 var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
+});
 	
 	/*
 	 var SPlantMarkerOptions = {
@@ -377,10 +381,10 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
    var splants=  L.geoJson(solarplants, {
         pointToLayer: function(feature, ll){
             return L.circleMarker(ll, {
-                color:'#000000',
+                color:'#A6917C',
 		   // '#ff7900',//
 		   // getColorSplants(feature.properties.Solar_MW),//
-                opacity: 1,
+                opacity: .8,
                 weight: 2,
                 fillColor: '#ff7900',
 		    //getColorSplants(feature.properties.Solar_MW),//
@@ -396,7 +400,7 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
         return 1.0083 * Math.pow(val/50,.5716) * minRadius;  
         
     }
-	/*
+	
 //Add nuclear plants
 	  function getColorNuclear(d) {
 		
@@ -430,7 +434,23 @@ var map2 = L.map('map2').setView([37.0902,-95.7129], 3);
     function calcRadius2(val) { 
         return 1.0083 * Math.pow(val/minValue2,.5716) * minRadius2;  
         
-    }	*/
+    }	
+	
+//layer control
+    var baseLayers = {
+    "Basemap 1": base,
+    "Basemap 2": OpenStreetMap_HOT
+};
+var overlays = {
+    
+    "Solar Plants": splants,
+    "Nuclear Plants": nuclear
+};
+	
+L.control.layers(baseLayers, overlays).addTo(map2);
+	
+
+
 	
 </script>
 </html>
