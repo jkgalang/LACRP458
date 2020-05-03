@@ -463,13 +463,10 @@ var map3 = L.map('map3').setView([37.0902,-95.7129], 3);
             accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cjl4MmRtMHFrZjNtcDh2aHo5c2hzcCJ9.ky0Hh9SSvjfM4MN4K79sUg' 
         }).addTo(map3);
 	
-	 var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-	maxZoom: 19,
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
-});
-	var states=  L.geoJSON(statescon).addTo(map3);
+
+	var states=  L.geoJSON(statecon).addTo(map3);
 	
-	// get color depending on population density value
+	// get color depending on population energy consumption
 	function getColorCon(d) {
 		return d > 600 ? '#253494' :
 				d > 400  ? '#2c7fb8' :
