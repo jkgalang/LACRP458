@@ -175,6 +175,11 @@
             <p>This map shows the energy consumption of each state per capita. .</p>
             </div>   
 	    <div id="map3"></div>
+<div id='mapcon4'>
+	 <h2>Heat map of wind turbines in the United States</h2>
+            <p>This map illustrates where wind turbines are located in the United States.</p>
+            </div>   
+	    <div id="map4"></div>
 	
     </body>
 <script>
@@ -454,7 +459,7 @@ L.control.layers(baseLayers, overlays).addTo(map2);
 //Map 3
 //used geojson.io to add data to original geojson file
 	
-var map3 = L.map('map3').setView([37.0902,-95.7129], 3);
+var map3 = L.map('map3').setView([37.0902,-95.7129], 2.5);
 	
 	    var base = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -526,16 +531,6 @@ var map3 = L.map('map3').setView([37.0902,-95.7129], 3);
 	}).addTo(map3);
 	
 	
-// add popup for energy consumed when clicked on
-     var con;
-     con = L.geoJson(statecon, {
-		style: style,
-		onEachFeature: function (feature, layer) {
-     layer.bindPopup('<h1>'+feature.properties.EnergyConsumed+'</h1>');
-     }
-     }).addTo(map3);	
-	
-	
 //energy consumption legend
 var legend3 = L.control({
 position: 'bottomright'	
@@ -555,6 +550,14 @@ legend2.onAdd = function(map3) {
   return div;
 };
 legend2.addTo(map3);
+	
+	
+//map 4 wind energy heat map
+	
+$.getJSON("https://jkgalang.github.io/LACRP458/geojson/WindTurbines.geojson", function(data) {
+    var coords = data.features.map(feat => feat.geometry.coordinates.slice().reverse())
+    var heat = L.heatLayer(coords).addTo(map4); //all default options - customizable options below
+});
 	
 
  
