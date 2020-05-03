@@ -162,6 +162,7 @@
   <div id='mapcon1'>
             <h2>Solar and wind potential of the United States</h2>
             <p>This map shows the potential for solar and wind power production across the United States. It can be helpful in deciding the best areas of the country to put solar power fields or wind farms.</p>
+	    <button id="iowaBtn">Look closer at Iowa</button>
             </div>    
             <div id="map1"></div>
 	
@@ -329,7 +330,12 @@ map1.on('overlayadd', function (eventLayer) {
 		 legend2.addTo(this);
 	}	
 });
-	
+
+//button to go to iowa
+ document.getElementById("iowaBtn").addEventListener("click", iowa);
+        function iowa() {
+            map.setView(new L.LatLng(41.5868,-93.6250), 7);
+        };    
 	
 //Map 2
 	
