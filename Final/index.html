@@ -17,11 +17,12 @@
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
    
     
-  <script src="../geojson/usaData"></script>
+  <script src="../geojson/statesconsumption.geojson"></script>
   <script src="../geojson/SolarPotential.geojson"></script>
   <script src="../geojson/windPotential.json"></script>
   <script src="../geojson/solarplants.geojson"></script>
   <script src="../geojson/nuclear.geojson"></script>
+	
 	
       
     
@@ -459,13 +460,95 @@ var map3 = L.map('map3').setView([37.0902,-95.7129], 3);
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
             id: 'mapbox/streets-v11',
-            accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cTM2cWNnMGdlZjNsbzNoYmNnZ2UxMSJ9.fu3hf2aNPWQgx3Hug_T3Yw' 
+            accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cjl4MmRtMHFrZjNtcDh2aHo5c2hzcCJ9.ky0Hh9SSvjfM4MN4K79sUg' 
         }).addTo(map3);
 	
 	 var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 	maxZoom: 19,
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
 });
+	var states=  L.geoJSON(statescon).addTo(map3);
+	
+	// get color depending on population density value
+	function getColorCon(d) {
+		return d > 600 ? '#253494' :
+				d > 400  ? '#2c7fb8' :
+				d > 250  ? '#41b6c4' :
+				d > 100 ? '#7fcdbb' :
+				
+							'#ffffcc';
+	}
+
+	function style3(feature) {
+		return {
+			weight: 1,
+			opacity: 1,
+			color: 'white',
+			fillOpacity: 0.7,
+			fillColor: getColorCon(feature.properties.EnergyConsumed)
+		};
+	}
+
+	function highlightFeature(e) {
+		var layer = e.target;
+
+		layer.setStyle({
+			weight: 2,
+			color: 'black',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+			layer.bringToFront();
+		}
+
+	}
+
+	var geojson3;
+
+	function resetHighlight(e) {
+		geojson3.resetStyle(e.target);
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
+
+	geojson3 = L.geoJson(statecon, {
+		style: style3,
+		onEachFeature: onEachFeature
+	}).addTo(map3);
+	
+//energy consumption legend
+var legend3 = L.control({
+position: 'bottomright'	
+});
+
+legend2.onAdd = function(map3) {
+  var div = L.DomUtil.create('div', 'info legend'),
+    levels = [100, 250, 400, 600];
+	
+	 div.innerHTML += "<b>Energy Consumption Per Capita in Million Btu</b><br>";
+// loop through items and generate a label with a colored square for each
+  for (var i = 0; i < levels.length; i++) {
+    div.innerHTML +=
+      '<i style="background:' + getColorCon(levels[i]+ 1 ) + ' "></i> ' +
+      levels[i] + (levels[i + 1] ? '&ndash;' + levels[i + 1] + '<br>' : '+');
+  }
+  return div;
+};
+legend2.addTo(map3);
+ 
+
 
 	
 </script>
