@@ -99,7 +99,8 @@
             #mapcon3 {position:absolute; background-color:#F0F0F0; color:black; text-align:left; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
             #map3 {position: relative;  height: 400px; margin-left:600px;border-left:2px; padding 0; overflow:hidden;}
        
-            
+            #mapcon4 {position:absolute; background-color:#F0F0F0; color:black; text-align:left; margin-right: 0px; margin-left:0px; width:600px; height:400px;padding 0; }
+            #map4 {position: relative;  height: 400px; margin-left:600px;border-left:2px; padding 0; overflow:hidden;}
     
 	
 /*legends*/
@@ -167,6 +168,13 @@
             <p>This map shows the locations of solar power plants in the United States. It illustrates the MW output of each plant represented by the size of the circe.</p>
             </div>   
 	    <div id="map2"></div>
+	
+ <div id='mapcon3'>
+	 <h2>Energy consumption per capita (Million Btu)</h2>
+            <p>This map shows the energy consumption of each state per capita. .</p>
+            </div>   
+	    <div id="map3"></div>
+	
     </body>
 <script>
 	
@@ -440,8 +448,24 @@ var overlays = {
 };
 	
 L.control.layers(baseLayers, overlays).addTo(map2);
-	
 
+	
+//Map 3
+//used geojson.io to add data to original geojson file
+	
+var map3 = L.map('map3').setView([37.0902,-95.7129], 3);
+	
+	    var base = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            accessToken: 'pk.eyJ1IjoiamtnYWxhbmciLCJhIjoiY2s5cTM2cWNnMGdlZjNsbzNoYmNnZ2UxMSJ9.fu3hf2aNPWQgx3Hug_T3Yw' 
+        }).addTo(map3);
+	
+	 var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+	maxZoom: 19,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
+});
 
 	
 </script>
